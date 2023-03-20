@@ -1,5 +1,5 @@
 
-YCoreUI
+# AndroidYCoreUI
 ==================
 
 ### How to generate test report
@@ -23,5 +23,5 @@ YCoreUI
 - Gradle command for checking lint error `ktlintCheck`
 - Gradle command for formatting code `ktlintFormat`
 =======
-# AndroidYCoreUI
+
 
