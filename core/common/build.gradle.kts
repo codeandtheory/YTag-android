@@ -7,11 +7,6 @@ plugins {
     id("co.yml.coreui.hilt")
 }
 
-private val excludedFiles = mutableSetOf(
-    "**/co.yml.coreui/core/common/model/*",
-    "**/co.yml.coreui/core/common/di/*",
-    "**/co.yml.coreui/core/common/AppResult.*"
-)
 private val limits = mutableMapOf(
     "instruction" to 0.0,
     "branch" to 0.0,
@@ -20,7 +15,6 @@ private val limits = mutableMapOf(
     "method" to 0.0,
     "class" to 0.0
 )
-addExclusion(excludedFiles)
 setModuleTestCoverageLimits(limits)
 
 android {

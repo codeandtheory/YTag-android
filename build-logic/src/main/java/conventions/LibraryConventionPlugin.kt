@@ -23,8 +23,6 @@ class LibraryConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply(libs.findPlugin("android.library").get().get().pluginId)
                 apply(libs.findPlugin("kotlin.android").get().get().pluginId)
-                apply(libs.findPlugin("kotlin.serialization").get().get().pluginId)
-
             }
 
             extensions.configure<LibraryExtension> {
@@ -39,8 +37,6 @@ class LibraryConventionPlugin : Plugin<Project> {
 
             dependencies {
                 add("implementation", libs.findLibrary("coroutine").get())
-                add("implementation", libs.findLibrary("kotlinx.serialization").get())
-                add("implementation", libs.findLibrary("kotlin.serialization").get())
 
                 add("testImplementation", kotlin("test"))
                 add("testImplementation", libs.findBundle("coroutine.test").get())

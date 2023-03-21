@@ -8,11 +8,11 @@ buildscript {
         classpath(versionCatalogLibs.android.gradle.plugin)
         classpath(versionCatalogLibs.kotlin.gradle.plugin)
         classpath(versionCatalogLibs.jacoco.core)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
 }
 @Suppress("DSL_SCOPE_VIOLATION") // scope violation issue: work around suggested from: https://github.com/gradle/gradle/issues/22797
 plugins {
-    alias(versionCatalogLibs.plugins.kotlin.serialization) apply false
     alias(versionCatalogLibs.plugins.hilt) apply false
     alias(versionCatalogLibs.plugins.sonar)
     alias(versionCatalogLibs.plugins.dokka)

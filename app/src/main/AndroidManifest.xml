@@ -17,7 +17,7 @@
         android:theme="@style/Theme.CoreUICatalog"
         tools:targetApi="31">
         <activity
-            android:name="co.yml.coreui.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CoreUICatalog">
             <intent-filter>
@@ -25,8 +25,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".ui.presentation.YTagActivity"/>
     </application>
 
 </manifest>

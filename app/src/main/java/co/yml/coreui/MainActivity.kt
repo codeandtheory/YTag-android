@@ -1,11 +1,21 @@
 package co.yml.coreui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import co.yml.coreui.ui.AppScreen
+import co.yml.coreui.ui.compositions.AppBar
+import co.yml.coreui.ui.presentation.CoreUIComponents
+import co.yml.coreui.ui.presentation.YTagActivity
+import co.yml.coreui.ui.theme.YCoreUITheme
 
 /**
  * Main activity: Launcher Activity
@@ -14,12 +24,32 @@ import co.yml.coreui.ui.AppScreen
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, true)
         setContent {
-//       for larger screen get screen width size class here and pass it to app screen    val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
-            AppScreen()
+            YCoreUITheme {
+                Scaffold(modifier = Modifier.fillMaxSize(),
+                    containerColor = YCoreUITheme.colors.background,
+                    topBar = { AppBar() })
+                {
+                    Column(
+                        modifier = Modifier
+                            .padding(it)
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CoreUIComponents(title = getString(R.string.title_y_tag), onClick = {
+                            startActivity(
+                                Intent(
+                                    this@MainActivity,
+                                    YTagActivity::class.java
+                                )
+                            )
+                        })
+                    }
+                }
+            }
         }
     }
 }

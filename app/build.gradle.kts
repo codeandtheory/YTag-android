@@ -19,8 +19,8 @@ dependencies {
     implementation(versionCatalogLibs.hilt.nav.compose)
     implementation(versionCatalogLibs.androidx.lifecycle.viewModelCompose)
 
+    implementation(project(mapOf("path" to ":YCoreUILib")))
     implementation(project(mapOf("path" to ":core:ui")))
-    implementation(project(mapOf("path" to ":feature:post")))
 
     androidTestImplementation(versionCatalogLibs.androidx.test.core)
     androidTestImplementation(versionCatalogLibs.androidx.test.core.ktx)

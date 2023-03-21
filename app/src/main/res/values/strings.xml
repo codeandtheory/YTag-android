@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoreUICatalogApp</string>
+    <string name="title_y_tag">Tags</string>
 </resources>
