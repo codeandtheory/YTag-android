@@ -2,8 +2,7 @@ package co.yml.ycoreui.ui.ytag
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -25,6 +24,7 @@ import co.yml.ycoreui.ui.ytag.model.TagViewModifiers
 fun TagView(tagViewModifiers: TagViewModifiers) {
     with(tagViewModifiers) {
         Row(modifier = Modifier
+            .defaultMinSize(minWidth = 104.dp, minHeight = 52.dp)
             .run {
                 if (enableBorder) {
                     border(
@@ -54,6 +54,7 @@ fun TagView(tagViewModifiers: TagViewModifiers) {
                         endPadding,
                         bottomPadding
                     )
+                    .align(Alignment.CenterVertically)
                     .semantics {
                         this.contentDescription = text
                     },
