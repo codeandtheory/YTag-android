@@ -11,26 +11,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import dagger.hilt.android.AndroidEntryPoint
 import co.yml.coreui.ui.compositions.AppBar
 import co.yml.coreui.ui.presentation.CoreUIComponents
 import co.yml.coreui.ui.presentation.YTagActivity
-import co.yml.coreui.ui.theme.YCoreUITheme
+import co.yml.coreui.ui.theme.CoreUICatalogTheme
 
 /**
  * Main activity: Launcher Activity
  *
  * @constructor Create empty Main activity
  */
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            YCoreUITheme {
+            CoreUICatalogTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
-                    containerColor = YCoreUITheme.colors.background,
+                    containerColor = CoreUICatalogTheme.colors.background,
                     topBar = { AppBar() })
                 {
                     Column(

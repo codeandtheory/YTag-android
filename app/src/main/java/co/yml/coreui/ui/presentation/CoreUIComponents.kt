@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import co.yml.coreui.ui.theme.YCoreUITheme
+import co.yml.coreui.ui.theme.CoreUICatalogTheme
 
 
 @Composable
@@ -19,12 +19,12 @@ fun CoreUIComponents(title: String, onClick: () -> Unit) {
                 .padding(end = 10.dp, start = 10.dp)
                 .fillMaxWidth()
                 .height(50.dp), onClick = onClick,
-            colors = ButtonDefaults.buttonColors(containerColor = YCoreUITheme.colors.button)
+            colors = ButtonDefaults.buttonColors(containerColor = CoreUICatalogTheme.colors.button)
         ) {
             Text(
                 text = title,
-                style = YCoreUITheme.typography.button,
-                color = YCoreUITheme.colors.text
+                style = CoreUICatalogTheme.typography.button,
+                color = CoreUICatalogTheme.colors.text
             )
         }
     }

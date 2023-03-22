@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
+import co.yml.coreui.ui.theme.CoreUICatalogTheme
 
 @Composable
 fun AppScreen() {

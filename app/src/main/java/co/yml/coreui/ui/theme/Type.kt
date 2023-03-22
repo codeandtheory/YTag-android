@@ -5,7 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-data class YCoreUITypography(
+data class CoreUICatalogTypography(
     val header: TextStyle = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 24.sp,
@@ -18,4 +18,4 @@ data class YCoreUITypography(
     )
 )
 
-internal val LocalTypography = staticCompositionLocalOf { YCoreUITypography() }
+internal val LocalTypography = staticCompositionLocalOf {CoreUICatalogTypography() }

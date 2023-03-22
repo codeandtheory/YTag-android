@@ -14,7 +14,4 @@ dependencies {
     implementation (versionCatalogLibs.bundles.compose)
     //ktx
     implementation (versionCatalogLibs.bundles.ktx)
-    //Android Testing
-    testImplementation(project(mapOf("path" to ":core:test")))
-    androidTestImplementation(project(mapOf("path" to ":core:test")))
 }

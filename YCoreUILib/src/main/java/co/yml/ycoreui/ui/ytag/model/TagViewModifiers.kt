@@ -1,7 +1,9 @@
-package co.yml.coreui.ui.ytag.model
+package co.yml.ycoreui.ui.ytag.model
 
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -16,15 +18,14 @@ data class TagViewModifiers(
     val enableBorder: Boolean,
     val borderWidth: Dp,
     val borderColor: Color,
-    val tagShapeSize: Dp,
     val backgroundColor: Color,
-    val tagShape: TagShape,
     val startPadding: Dp,
     val topPadding: Dp,
     val bottomPadding: Dp,
     val endPadding: Dp,
-    val leadingIcon: Int ?=null,
-    val trailingIcon: Int ?=null
+    val leadingIcon: @Composable (() -> Unit)? = null,
+    val trailingIcon: @Composable (() -> Unit)? = null,
+    val shape: Shape
 ) {
     class Builder {
         private var text: String = ""
@@ -34,15 +35,14 @@ data class TagViewModifiers(
         private var enableBorder: Boolean = false
         private var borderWidth: Dp = 1.dp
         private var borderColor: Color = Color.Black
-        private var tagShapeSize: Dp = 8.dp
         private var backgroundColor: Color = Color.White
-        private var tagShape: TagShape = TagShape.ROUNDED_RECTANGLE
         private var startPadding: Dp = 8.dp
         private var topPadding: Dp = 4.dp
         private var bottomPadding: Dp = 4.dp
         private var endPadding: Dp = 8.dp
-        private var leadingIcon: Int? = null
-        private var trailingIcon: Int ?=null
+        private var leadingIcon: @Composable (() -> Unit)? = null
+        private var trailingIcon: @Composable (() -> Unit)? = null
+        private var shape: Shape = RectangleShape
 
         fun text(text: String) = apply { this.text = text }
 
@@ -58,12 +58,8 @@ data class TagViewModifiers(
 
         fun borderColor(borderColor: Color) = apply { this.borderColor = borderColor }
 
-        fun tagShapeSize(tagShapeSize: Dp) = apply { this.tagShapeSize = tagShapeSize }
-
         fun backgroundColor(backgroundColor: Color) =
             apply { this.backgroundColor = backgroundColor }
-
-        fun tagShape(tagShape: TagShape) = apply { this.tagShape = tagShape }
 
         fun startPadding(startPadding: Dp) = apply { this.startPadding = startPadding }
 
@@ -73,9 +69,11 @@ data class TagViewModifiers(
 
         fun endPadding(endPadding: Dp) = apply { this.endPadding = endPadding }
 
-        fun leadingIcon(icon: Int) = apply { this.leadingIcon = icon }
+        fun leadingIcon(leadingIcon: @Composable (() -> Unit)?) = apply { this.leadingIcon = leadingIcon }
 
-        fun trailingIcon(icon: Int) = apply { this.trailingIcon = icon }
+        fun trailingIcon(trailingIcon: @Composable (() -> Unit)?) = apply { this.trailingIcon = trailingIcon }
+
+        fun shape(shape: Shape) = apply { this.shape =shape }
 
         fun build() = TagViewModifiers(
             text,
@@ -85,23 +83,14 @@ data class TagViewModifiers(
             enableBorder,
             borderWidth,
             borderColor,
-            tagShapeSize,
             backgroundColor,
-            tagShape,
             startPadding,
             topPadding,
             bottomPadding,
             endPadding,
             leadingIcon,
-            trailingIcon
+            trailingIcon,
+            shape
         )
     }
-
-
-}
-
-enum class TagShape {
-    RECTANGLE,
-    ROUNDED_RECTANGLE,
-    CAPSULE
 }

@@ -4,7 +4,6 @@ import co.yml.coreui.jacoco.setModuleTestCoverageLimits
 plugins {
     id("co.yml.coreui.library")
     id("co.yml.coreui.library.jacoco")
-    id("co.yml.coreui.hilt")
 }
 
 private val limits = mutableMapOf(

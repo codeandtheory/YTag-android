@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.yml.coreui.R
-import co.yml.coreui.ui.theme.YCoreUITheme
+import co.yml.coreui.ui.theme.CoreUICatalogTheme
 
 @Composable
 fun AppBar() {
@@ -21,13 +21,13 @@ fun AppBar() {
         TopAppBar(
             modifier = Modifier
                 .fillMaxWidth(),
-            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = YCoreUITheme.colors.button),
+            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = CoreUICatalogTheme.colors.button),
             title = {
                 Text(
                     text = stringResource(R.string.app_name),
-                    color = YCoreUITheme.colors.text,
+                    color = CoreUICatalogTheme.colors.text,
                     textAlign = TextAlign.Center,
-                    style = YCoreUITheme.typography.header
+                    style = CoreUICatalogTheme.typography.header
                 )
             }
         )
@@ -41,14 +41,14 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp),
-            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = YCoreUITheme.colors.button),
+            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = CoreUICatalogTheme.colors.button),
             title = {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = title,
-                    color = YCoreUITheme.colors.text,
+                    color = CoreUICatalogTheme.colors.text,
                     textAlign = TextAlign.Center,
-                    style = YCoreUITheme.typography.header
+                    style = CoreUICatalogTheme.typography.header
                 )
             },
             actions = {
@@ -72,7 +72,7 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    YCoreUITheme {
+    CoreUICatalogTheme {
         AppBar()
     }
 }
@@ -81,7 +81,7 @@ fun DefaultPreview() {
 @Preview(showBackground = true)
 @Composable
 fun AppBarWithBackButton() {
-    YCoreUITheme {
+    CoreUICatalogTheme {
         AppBarWithBackButton(title = stringResource(id = R.string.title_y_tag)) {
         }
     }
