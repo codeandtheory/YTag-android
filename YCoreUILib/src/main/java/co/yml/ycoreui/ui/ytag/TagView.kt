@@ -24,7 +24,6 @@ import co.yml.ycoreui.ui.ytag.model.TagViewModifiers
 fun TagView(tagViewModifiers: TagViewModifiers) {
     with(tagViewModifiers) {
         Row(modifier = Modifier
-            .defaultMinSize(minWidth = 104.dp, minHeight = 52.dp)
             .run {
                 if (enableBorder) {
                     border(
@@ -47,6 +46,10 @@ fun TagView(tagViewModifiers: TagViewModifiers) {
                 text = tagViewModifiers.text,
                 color = tagViewModifiers.textColor,
                 fontSize = tagViewModifiers.fontSize,
+                fontWeight = tagViewModifiers.fontWeight,
+                fontFamily = tagViewModifiers.fontFamily,
+                fontStyle = tagViewModifiers.fontStyle,
+                letterSpacing = tagViewModifiers.letterSpacing,
                 modifier = Modifier
                     .padding(
                         startPadding,
@@ -58,7 +61,14 @@ fun TagView(tagViewModifiers: TagViewModifiers) {
                     .semantics {
                         this.contentDescription = text
                     },
-                style = tagViewModifiers.style
+                style = tagViewModifiers.style,
+                textDecoration = tagViewModifiers.textDecoration,
+                textAlign = tagViewModifiers.textAlign,
+                lineHeight = tagViewModifiers.lineHeight,
+                overflow = tagViewModifiers.overflow,
+                softWrap = tagViewModifiers.softWrap,
+                maxLines = tagViewModifiers.maxLines,
+                onTextLayout = tagViewModifiers.onTextLayout
             )
 
             trailingIcon?.invoke()
