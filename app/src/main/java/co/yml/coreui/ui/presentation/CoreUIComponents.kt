@@ -6,19 +6,25 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import co.yml.coreui.R
 import co.yml.coreui.ui.theme.CoreUICatalogTheme
-
 
 @Composable
 fun CoreUIComponents(title: String, onClick: () -> Unit) {
     Column {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_normal_medium)))
         Button(
             modifier = Modifier
-                .padding(end = 10.dp, start = 10.dp)
+                .padding(
+                    end = dimensionResource(id = R.dimen.padding_normal_medium),
+                    start = dimensionResource(
+                        id = R.dimen.padding_normal_medium
+                    )
+                )
                 .fillMaxWidth()
-                .height(50.dp), onClick = onClick,
+                .height(48.dp), onClick = onClick,
             colors = ButtonDefaults.buttonColors(containerColor = CoreUICatalogTheme.colors.button)
         ) {
             Text(

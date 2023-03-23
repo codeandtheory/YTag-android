@@ -1,5 +1,6 @@
 package co.yml.ycoreui.ui.ytag.model
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -17,10 +18,45 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
+/**
+ * Immutable collection of modifier elements that decorate or add behavior to TagView elements.
+ * - If a parameter is explicitly set here then that parameter will always be used.
+ * - If a parameter is not set then the corresponding default value will be used
+ *
+ * @param minWidth define a default min width of TagView
+ * @param minHeight define a default min height of TagView
+ * @param width define width of TagView
+ * @param height define height of TagView
+ * @param textColor apply color to the text
+ * @param fontSize define fontSize of the text element
+ * @param fontStyle define fontStyle of the text element
+ * @param fontFamily define fontStyle of the text element
+ * @param letterSpacing the amount of space to add between each letter in the text element
+ * @param textDecoration the decorations to paint on the text element
+ * @param textAlign the alignment of the text within the lines of the paragraph
+ * @param lineHeight line height for the Paragraph in TextUnit uni
+ * @param overflow how visual overflow should be handled.
+ * @param softWrap whether the text should break at soft line breaks.
+ * @param maxLines an optional maximum number of lines for the text to span, wrapping if necessary.
+ * @param onTextLayout callback that is executed when a new text layout is calculated.
+ * @param style style configuration for the text such as color, font, line height etc.
+ * @param enableBorder enable border for TagView
+ * @param borderWidth define borderWidth of the TagView
+ * @param borderColor define borderColor of the TagView
+ * @param backgroundColor define backgroundColor of the TagView
+ * @param textPadding define padding for TagView text component
+ * @param shape defines the shape of the TagView
+ * @param tonalElevation When color is ColorScheme.surface, a higher the elevation will result in a darker color in light theme and lighter color in dark theme.
+ * @param shadowElevation  The size of the shadow below the surface.
+ * @param containerPaddingValues define padding for TagView
+ * @param onClick perform click event
+ */
 data class TagViewModifiers(
     val minWidth: Dp,
     val minHeight: Dp,
-    val text: String,
+    val width: Dp?,
+    val height: Dp,
     val textColor: Color,
     val fontSize: TextUnit,
     val fontStyle: FontStyle,
@@ -39,17 +75,18 @@ data class TagViewModifiers(
     val borderWidth: Dp,
     val borderColor: Color,
     val backgroundColor: Color,
-    val startPadding: Dp,
-    val topPadding: Dp,
-    val bottomPadding: Dp,
-    val endPadding: Dp,
-    val leadingIcon: @Composable (() -> Unit)? = null,
-    val trailingIcon: @Composable (() -> Unit)? = null,
-    val shape: Shape
+    val textPadding: PaddingValues,
+    val shape: Shape,
+    val tonalElevation: Dp,
+    val shadowElevation: Dp,
+    val containerPaddingValues: PaddingValues,
+    val onClick: () -> Unit
 ) {
     class Builder {
         private var minWidth: Dp = 52.dp
-        private var minHeight: Dp = 52.dp
+        private var minHeight: Dp = 32.dp
+        private var width: Dp? = null
+        private var height: Dp = minHeight
         private var text: String = ""
         private var textColor: Color = Color.Black
         private var fontSize: TextUnit = 12.sp
@@ -69,19 +106,19 @@ data class TagViewModifiers(
         private var borderWidth: Dp = 1.dp
         private var borderColor: Color = Color.Black
         private var backgroundColor: Color = Color.White
-        private var startPadding: Dp = 8.dp
-        private var topPadding: Dp = 4.dp
-        private var bottomPadding: Dp = 4.dp
-        private var endPadding: Dp = 8.dp
-        private var leadingIcon: @Composable (() -> Unit)? = null
-        private var trailingIcon: @Composable (() -> Unit)? = null
+        private var textPadding: PaddingValues = PaddingValues(horizontal = 8.dp)
         private var shape: Shape = RectangleShape
+        private var tonalElevation: Dp = 0.dp
+        private var shadowElevation: Dp = 0.dp
+        private var containerPaddingValues: PaddingValues = PaddingValues(horizontal = 4.dp)
+        private var onClick: () -> Unit = {}
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
         fun minHeight(minHeight: Dp) = apply { this.minHeight = minHeight }
-        fun text(text: String) = apply { this.text = text }
 
+        fun width(width: Dp) = apply { this.width = width }
+        fun height(height: Dp) = apply { this.height = height }
         fun textColor(textColor: Color) = apply { this.textColor = textColor }
 
         fun fontSize(fontSize: TextUnit) = apply { this.fontSize = fontSize }
@@ -119,26 +156,22 @@ data class TagViewModifiers(
         fun backgroundColor(backgroundColor: Color) =
             apply { this.backgroundColor = backgroundColor }
 
-        fun startPadding(startPadding: Dp) = apply { this.startPadding = startPadding }
-
-        fun topPadding(topPadding: Dp) = apply { this.topPadding = topPadding }
-
-        fun bottomPadding(bottomPadding: Dp) = apply { this.bottomPadding = bottomPadding }
-
-        fun endPadding(endPadding: Dp) = apply { this.endPadding = endPadding }
-
-        fun leadingIcon(leadingIcon: @Composable (() -> Unit)?) =
-            apply { this.leadingIcon = leadingIcon }
-
-        fun trailingIcon(trailingIcon: @Composable (() -> Unit)?) =
-            apply { this.trailingIcon = trailingIcon }
+        fun textPadding(textPadding: PaddingValues) = apply { this.textPadding = textPadding }
 
         fun shape(shape: Shape) = apply { this.shape = shape }
 
+        fun tonalElevation(tonalElevation: Dp) = apply { this.tonalElevation = tonalElevation }
+
+        fun shadowElevation(shadowElevation: Dp) = apply { this.shadowElevation = shadowElevation }
+        fun containerPaddingValues(paddingValues: PaddingValues) =
+            apply { this.containerPaddingValues = paddingValues }
+
+        fun onCLick(onClick: () -> Unit) = apply { this.onClick = onClick }
         fun build() = TagViewModifiers(
             minWidth,
             minHeight,
-            text,
+            width,
+            height,
             textColor,
             fontSize,
             fontStyle,
@@ -157,13 +190,12 @@ data class TagViewModifiers(
             borderWidth,
             borderColor,
             backgroundColor,
-            startPadding,
-            topPadding,
-            bottomPadding,
-            endPadding,
-            leadingIcon,
-            trailingIcon,
-            shape
+            textPadding,
+            shape,
+            tonalElevation,
+            shadowElevation,
+            containerPaddingValues,
+            onClick
         )
     }
 }

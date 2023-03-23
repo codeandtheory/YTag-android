@@ -7,11 +7,22 @@ plugins {
 
 android {
     namespace = "co.yml.ycoreui"
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
-    //Compose
-    implementation (versionCatalogLibs.bundles.compose)
-    //ktx
-    implementation (versionCatalogLibs.bundles.ktx)
+
+    testImplementation(versionCatalogLibs.mockk.android)
+    androidTestImplementation(versionCatalogLibs.compose.ui.testing)
+    androidTestImplementation(versionCatalogLibs.androidx.junit)
+    androidTestImplementation(versionCatalogLibs.androidx.test.espresso.core)
+    androidTestImplementation(versionCatalogLibs.androidx.test.core)
+    androidTestImplementation(versionCatalogLibs.androidx.test.core.ktx)
+    androidTestImplementation(versionCatalogLibs.androidx.test.ext)
+    androidTestImplementation(versionCatalogLibs.androidx.test.runner)
+    androidTestImplementation(versionCatalogLibs.androidx.test.rules)
+
+    debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose.ui.testing}")
 }

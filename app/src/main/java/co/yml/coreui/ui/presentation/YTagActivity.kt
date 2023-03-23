@@ -1,6 +1,8 @@
 package co.yml.coreui.ui.presentation
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -17,9 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import co.yml.coreui.R
 import co.yml.coreui.ui.compositions.AppBarWithBackButton
@@ -34,7 +42,6 @@ class YTagActivity : ComponentActivity() {
         setContent {
             CoreUICatalogTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
-//                    containerColor = YCoreUITheme.colors.background,
                     containerColor = Color.White,
                     topBar = {
                         AppBarWithBackButton(
@@ -53,21 +60,22 @@ class YTagActivity : ComponentActivity() {
                     ) {
                         LazyColumn(
                             content = {
-                                items(8) { item ->
+                                items(9) { item ->
                                     when (item) {
-                                        0 -> DefaultTag()
-                                        1 -> CapsuleTag()
-                                        2 -> RectangleTag()
-                                        3 -> RoundRectangleTag()
-                                        4 -> RoundRectangleTagWithLeadingIcon()
-                                        5 -> RoundRectangleTagWithTrailingIcon()
-                                        6 -> RoundRectangleTagWithLeadingTrailingIcon()
+                                        0 -> CapsuleTag()
+                                        1 -> RectangleTag()
+                                        2 -> RoundRectangleTag()
+                                        3 -> DefaultTag()
+                                        4 -> TagWithLeadingIcon()
+                                        5 -> TagWithTrailingIcon()
+                                        6 -> TagWithLeadingTrailingIcon()
                                         7 -> BorderTag()
+                                        8 -> ShadowTag()
                                     }
                                 }
                             },
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.padding(16.dp)
+                            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_normal)),
+                            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_normal_medium))
                         )
                     }
                 }
@@ -76,139 +84,184 @@ class YTagActivity : ComponentActivity() {
     }
 }
 
+val textStyle = TextStyle(
+    fontSize = 14.sp,
+    fontFamily = FontFamily.SansSerif,
+)
+
 @Composable
 fun DefaultTag() {
-    val tagViewModifiers = TagViewModifiers.Builder()
-        .text("Default")
-        .build()
-
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(text = stringResource(id = R.string.tag_default))
 }
 
 @Composable
 fun CapsuleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("Capsule")
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
+        .style(textStyle)
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(text = stringResource(id = R.string.tag_capsule), tagViewModifiers = tagViewModifiers)
 }
 
 @Composable
 fun RectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("Rectangle")
-        .fontSize(12.sp)
         .shape(RectangleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
+        .style(textStyle)
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(text = stringResource(id = R.string.tag_rectangle), tagViewModifiers = tagViewModifiers)
 }
 
 @Composable
 fun RoundRectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("RoundRectangle")
-        .shape(RoundedCornerShape(4.dp))
+        .shape(RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)))
         .backgroundColor(Color.Black)
         .textColor(Color.White)
+        .style(textStyle)
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(
+        text = stringResource(id = R.string.tag_round_rectangle),
+        tagViewModifiers = tagViewModifiers
+    )
 }
 
 @Composable
-fun RoundRectangleTagWithLeadingIcon() {
+fun TagWithLeadingIcon() {
+    val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("RoundRectangle")
-        .shape(RoundedCornerShape(4.dp))
+        .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
-        .leadingIcon {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_mylocation),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
-        }
+        .fontStyle(FontStyle.Italic)
         .build()
-
-    TagView(tagViewModifiers = tagViewModifiers)
+    val text = stringResource(id = R.string.tag_leading_icon)
+    TagView(text = text, leadingIcon = { enabled ->
+        IconButton(
+            modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
+            onClick = {
+                if (enabled) {
+                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_location_24px),
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
+    }, tagViewModifiers = tagViewModifiers)
 }
 
 
 @Composable
-fun RoundRectangleTagWithTrailingIcon() {
+fun TagWithTrailingIcon() {
+    val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("RoundRectangle")
-        .shape(RoundedCornerShape(4.dp))
+        .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
-        .trailingIcon {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
-        }
+        .fontSize(15.sp)
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    val text =  stringResource(id = R.string.tag_trailing_icon)
+    TagView(text =text, trailingIcon = { enabled ->
+        IconButton(modifier = Modifier
+            .padding(end = dimensionResource(id = R.dimen.padding_medium))
+            .size(dimensionResource(id = R.dimen.padding_normal_medium)), onClick = {
+            if (enabled) {
+                Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+            }
+        }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close_20px),
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
+    }, tagViewModifiers = tagViewModifiers)
 }
 
 @Composable
-fun RoundRectangleTagWithLeadingTrailingIcon() {
+fun TagWithLeadingTrailingIcon() {
+    val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("RoundRectangle")
-        .shape(RoundedCornerShape(4.dp))
+        .shape(CircleShape)
         .backgroundColor(Color.Black)
+        .maxLines(1)
+        .overFlow(TextOverflow.Ellipsis)
         .textColor(Color.White)
-        .leadingIcon {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_mylocation),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
-        }
-        .trailingIcon {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_close_clear_cancel),
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
+        .onCLick {
+           
         }
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(text = stringResource(id = R.string.tag_leading_trailing_icon), leadingIcon = { enabled ->
+        val text =  stringResource(id = R.string.tag_leading_icon)
+        IconButton(
+            modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
+            onClick = {
+                if (enabled) {
+                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_location_24px),
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
+    }, trailingIcon = { enabled ->
+        val text =  stringResource(id = R.string.tag_trailing_icon)
+        IconButton(modifier = Modifier
+            .padding(end = dimensionResource(id = R.dimen.padding_medium))
+            .size(dimensionResource(id = R.dimen.padding_normal_small)), onClick = {
+            if (enabled) {
+                Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+            }
+        }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close_20px),
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
+    }, tagViewModifiers = tagViewModifiers, enabled = false)
 }
 
 @Composable
 fun BorderTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .text("BorderTag")
         .textColor(Color.Black)
         .enableBorder(true)
         .borderColor(Color.Red)
+        .borderWidth(dimensionResource(id = R.dimen.padding_very_tiny))
         .backgroundColor(Color.White)
         .shape(CircleShape)
-        .startPadding(16.dp)
-        .endPadding(16.dp)
-        .topPadding(8.dp)
-        .bottomPadding(8.dp)
+        .style(textStyle)
         .build()
 
-    TagView(tagViewModifiers = tagViewModifiers)
+    TagView(text = stringResource(id = R.string.tag_border), tagViewModifiers = tagViewModifiers)
+}
+
+@Composable
+fun ShadowTag() {
+    val tagViewModifiers = TagViewModifiers.Builder()
+        .textColor(colorResource(id = R.color.tag_text_color))
+        .backgroundColor(colorResource(id = R.color.tag_background_color))
+        .shape(CircleShape)
+        .shadowElevation(dimensionResource(id = R.dimen.padding_tiny))
+        .style(textStyle)
+        .maxLines(1)
+        .overFlow(TextOverflow.Ellipsis)
+        .build()
+
+    TagView(text = stringResource(id = R.string.tag_shadow), tagViewModifiers = tagViewModifiers)
 }

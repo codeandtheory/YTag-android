@@ -61,11 +61,6 @@ gradlePlugin {
             implementationClass = "conventions.KotlinLibraryJacocoConventionPlugin"
         }
 
-        register("androidLibraryYCoreUILib"){
-            id = "co.yml.ycoreui"
-            implementationClass = "conventions.FeatureConventionPlugin"
-        }
-
         register("androidTest") {
             id = "co.yml.coreui.test"
             implementationClass = "conventions.AndroidTestConventionPlugin"

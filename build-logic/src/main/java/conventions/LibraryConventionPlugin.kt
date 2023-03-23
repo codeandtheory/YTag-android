@@ -28,9 +28,6 @@ class LibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
 
-                defaultConfig {
-                    testInstrumentationRunner = "co.yml.coreui.core.test.HiltTestRunner"
-                }
                 defaultConfig.targetSdk = 33
                 configureFlavors(this)
             }

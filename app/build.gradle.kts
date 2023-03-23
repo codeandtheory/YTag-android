@@ -11,6 +11,7 @@ android {
         applicationId = "co.yml.coreui"
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
@@ -19,11 +20,12 @@ dependencies {
 
     implementation(project(mapOf("path" to ":YCoreUILib")))
 
+    androidTestImplementation(versionCatalogLibs.androidx.junit)
     androidTestImplementation(versionCatalogLibs.androidx.test.core)
     androidTestImplementation(versionCatalogLibs.androidx.test.core.ktx)
     androidTestImplementation(versionCatalogLibs.androidx.test.ext)
     androidTestImplementation(versionCatalogLibs.androidx.test.runner)
     androidTestImplementation(versionCatalogLibs.androidx.test.rules)
 
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose}")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose.ui.testing}")
 }

@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -15,9 +16,12 @@ import androidx.compose.ui.unit.dp
 import co.yml.coreui.R
 import co.yml.coreui.ui.theme.CoreUICatalogTheme
 
+/**
+ * Top app bars display information at the top of a screen.
+ */
 @Composable
 fun AppBar() {
-    Surface(shadowElevation = 6.dp) {
+    Surface(shadowElevation = dimensionResource(id = R.dimen.padding_small)) {
         TopAppBar(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -27,31 +31,36 @@ fun AppBar() {
                     text = stringResource(R.string.app_name),
                     color = CoreUICatalogTheme.colors.text,
                     textAlign = TextAlign.Center,
-                    style = CoreUICatalogTheme.typography.header
+                    style = CoreUICatalogTheme.typography.subHeader
                 )
             }
         )
     }
 }
 
+
+/**
+ * Top app bars display information and actions at the top of a screen.
+ *
+ * @param title title of the screen
+ * @param onBackPressed implementation of back press event
+ */
 @Composable
 fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
-    Surface(shadowElevation = 6.dp) {
+    Surface(shadowElevation = dimensionResource(id = R.dimen.padding_small)) {
         TopAppBar(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp),
+                .fillMaxWidth(),
             colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = CoreUICatalogTheme.colors.button),
             title = {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
                     text = title,
                     color = CoreUICatalogTheme.colors.text,
                     textAlign = TextAlign.Center,
-                    style = CoreUICatalogTheme.typography.header
+                    style = CoreUICatalogTheme.typography.subHeader
                 )
             },
-            actions = {
+            navigationIcon = {
                 IconButton(
                     onClick = { onBackPressed() },
                     modifier = Modifier
@@ -60,7 +69,7 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back_arrow),
                         contentDescription = "Back",
-                        tint = Color.Unspecified
+                        tint = Color.Black
                     )
                 }
             }
@@ -73,7 +82,10 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
 @Composable
 fun DefaultPreview() {
     CoreUICatalogTheme {
-        AppBar()
+        Scaffold(modifier = Modifier.fillMaxSize(),
+            containerColor = CoreUICatalogTheme.colors.background,
+            topBar = { AppBar() },
+            content = { Box(Modifier.padding(it)) {} })
     }
 }
 
@@ -82,7 +94,13 @@ fun DefaultPreview() {
 @Composable
 fun AppBarWithBackButton() {
     CoreUICatalogTheme {
-        AppBarWithBackButton(title = stringResource(id = R.string.title_y_tag)) {
-        }
+        Scaffold(modifier = Modifier.fillMaxSize(),
+            containerColor = CoreUICatalogTheme.colors.background,
+            topBar = {
+                AppBarWithBackButton(title = stringResource(id = R.string.title_y_tag)) {
+                }
+            },
+            content = { Box(Modifier.padding(it)) {} })
+
     }
 }

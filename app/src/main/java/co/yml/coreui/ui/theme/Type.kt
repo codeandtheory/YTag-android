@@ -11,6 +11,11 @@ data class CoreUICatalogTypography(
         fontSize = 24.sp,
         letterSpacing = 0.15.sp
     ),
+    val subHeader: TextStyle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp,
+        letterSpacing = 0.15.sp
+    ),
     val button: TextStyle = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
@@ -18,4 +23,4 @@ data class CoreUICatalogTypography(
     )
 )
 
-internal val LocalTypography = staticCompositionLocalOf {CoreUICatalogTypography() }
+internal val LocalTypography = staticCompositionLocalOf { CoreUICatalogTypography() }
