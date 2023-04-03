@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import co.yml.ycoreui.ui.ytag.model.TagViewModifiers
 
 /**
- * Element that can used as a chip
+ * [TagView] Compose method used for creating a custom chip
  *
  * @param text text the text to be displayed
  * @param leadingIcon the optional leading icon to be displayed at the beginning of the TagView
