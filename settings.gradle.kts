@@ -24,5 +24,10 @@ pluginManagement {
 
 rootProject.name = "CoreUICatalog"
 include(":app")
-include(":YCoreUILib")
+include(":core:ui")
+include(":core:common")
+include(":core:data")
+include(":core:test")
+include("feature:ytag")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+

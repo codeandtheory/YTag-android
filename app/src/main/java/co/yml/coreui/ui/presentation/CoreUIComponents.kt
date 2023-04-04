@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import co.yml.coreui.R
-import co.yml.coreui.ui.theme.CoreUICatalogTheme
+import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
+import co.yml.coreui.ui.R
 
 @Composable
 fun CoreUIComponents(title: String, onClick: () -> Unit) {

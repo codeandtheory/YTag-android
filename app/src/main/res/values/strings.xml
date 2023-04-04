@@ -1,13 +1,3 @@
 <resources>
     <string name="app_name">CoreUICatalogApp</string>
-    <string name="title_y_tag">Tags</string>
-    <string name="tag_default">Default</string>
-    <string name="tag_capsule">Capsule</string>
-    <string name="tag_rectangle">Rectangle</string>
-    <string name="tag_round_rectangle">RoundRectangle</string>
-    <string name="tag_leading_icon">LeadingIcon</string>
-    <string name="tag_trailing_icon">TrailingIcon</string>
-    <string name="tag_leading_trailing_icon">"LeadingTrailingIcon"</string>
-    <string name="tag_border">BorderTag</string>
-    <string name="tag_shadow">ShadowTag</string>
 </resources>

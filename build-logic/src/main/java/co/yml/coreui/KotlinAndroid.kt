@@ -28,6 +28,7 @@ internal fun Project.configureKotlinAndroid(
 
         defaultConfig {
             minSdk = 21
+            testInstrumentationRunner = "co.yml.coreui.core.test.HiltTestRunner"
             testHandleProfiling = true
             testFunctionalTest = true
             vectorDrawables {

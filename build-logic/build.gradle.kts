@@ -61,6 +61,17 @@ gradlePlugin {
             implementationClass = "conventions.KotlinLibraryJacocoConventionPlugin"
         }
 
+
+        register("androidFeature") {
+            id = "co.yml.coreui.feature"
+            implementationClass = "conventions.FeatureConventionPlugin"
+        }
+
+        register("androidHilt") {
+            id = "co.yml.coreui.hilt"
+            implementationClass = "conventions.HiltConventionPlugin"
+        }
+
         register("androidTest") {
             id = "co.yml.coreui.test"
             implementationClass = "conventions.AndroidTestConventionPlugin"

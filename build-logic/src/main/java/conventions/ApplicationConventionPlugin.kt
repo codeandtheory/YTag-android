@@ -36,13 +36,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 defaultConfig.targetSdk = 33
                 configureFlavors(this)
             }
-            dependencies {
-                add("testImplementation", kotlin("test"))
-                add("testImplementation", libs.findBundle("coroutine.test").get())
-                add("testImplementation", libs.findLibrary("androidx.junit").get())
-                add("androidTestImplementation", libs.findLibrary("androidx.junit").get())
-                add("androidTestImplementation", kotlin("test"))
-            }
         }
     }
 

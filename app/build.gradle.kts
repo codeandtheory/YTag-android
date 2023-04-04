@@ -3,6 +3,7 @@ plugins {
     id("co.yml.coreui.application")
     id("co.yml.coreui.application.jacoco")
     id("co.yml.coreui.application.compose")
+    id("co.yml.coreui.hilt")
 }
 
 android {
@@ -11,21 +12,22 @@ android {
         applicationId = "co.yml.coreui"
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
+    implementation(versionCatalogLibs.hilt.nav.compose)
     implementation(versionCatalogLibs.androidx.lifecycle.viewModelCompose)
 
-    implementation(project(mapOf("path" to ":YCoreUILib")))
+    implementation(project(mapOf("path" to ":core:ui")))
+    implementation(project(mapOf("path" to ":feature:ytag")))
 
-    androidTestImplementation(versionCatalogLibs.androidx.junit)
     androidTestImplementation(versionCatalogLibs.androidx.test.core)
     androidTestImplementation(versionCatalogLibs.androidx.test.core.ktx)
     androidTestImplementation(versionCatalogLibs.androidx.test.ext)
     androidTestImplementation(versionCatalogLibs.androidx.test.runner)
     androidTestImplementation(versionCatalogLibs.androidx.test.rules)
-
     debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose.ui.testing}")
+
+    androidTestImplementation(project(mapOf("path" to ":core:test")))
 }

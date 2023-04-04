@@ -24,6 +24,11 @@ androidxTestMonitor = "1.6.0"
 androidxTestCore = "1.4.0"
 androidxTestExt = "1.1.4"
 
+#hilt
+hilt = "2.44"
+hilt_nav_compose = "1.0.0"
+hiltExt = "1.0.0"
+
 #jacoco
 jacoco = "0.8.7"
 
@@ -90,6 +95,13 @@ androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "li
 androidx-lifecycle-viewModel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
 
+#hilt
+hilt_compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt_android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt_test = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+hilt_nav_compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt_nav_compose" }
+hilt_ext_compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+
 #ktx
 core_ktx = { module = "androidx.core:core-ktx", version.ref = "core_ktx" }
 runtime_ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
@@ -121,6 +133,7 @@ test_runner = { module = "androidx.test:runner", version.ref = "test_runner" }
 compose = ["androidx.activity.compose", "androidx.compose.foundation", "androidx.navigation.compose", "androidx.compose.material3", "androidx.compose.material3.windowSizeClass", "androidx.compose.runtime","androidx.compose.ui.tooling","androidx.compose.ui.tooling.preview"]
 test = ["androidx.test.core","androidx.test.ext","androidx.test.rules","androidx.test.runner", "compose_ui_testing"]
 coroutine_test = ["coroutine.test", "coroutine.turbine"]
+hilt = ["hilt.compiler","hilt.android","hilt.test"]
 ktx = ["core.ktx", "runtime.ktx"]
 mock =["mockk.android","anotation","test.runner"]
 
@@ -131,6 +144,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVer
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinVersion" }
 jacoco = { id = "jacoco"}
