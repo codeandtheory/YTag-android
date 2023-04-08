@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 
 /**
- * Immutable collection of modifier elements that decorate or add behavior to TagView elements.
+ * [TagViewModifiers] Represents immutable collection of modifier elements that decorate or add behavior to TagView elements.
  * - If a parameter is explicitly set here then that parameter will always be used.
  * - If a parameter is not set then the corresponding default value will be used
  *

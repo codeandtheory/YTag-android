@@ -27,12 +27,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.yml.coreui.core.ui.templates.AppBarWithBackButton
 import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
 import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
 import co.yml.coreui.ui.R
 import co.yml.coreui.core.ui.ytag.TagView
+import co.yml.coreui.core.ui.ytag.TagViewContainer
+import co.yml.coreui.core.ui.ytag.model.TagViewContainerModifiers
+import co.yml.coreui.core.ui.ytag.model.TagViewData
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterial3Api
@@ -61,17 +65,18 @@ class YTagActivity : ComponentActivity() {
                     ) {
                         LazyColumn(
                             content = {
-                                items(9) { item ->
+                                items(10) { item ->
                                     when (item) {
                                         0 -> CapsuleTag()
-                                        1 -> RectangleTag()
-                                        2 -> RoundRectangleTag()
+//                                        1 -> RectangleTag()
+//                                        2 -> RoundRectangleTag()
                                         3 -> DefaultTag()
                                         4 -> TagWithLeadingIcon()
                                         5 -> TagWithTrailingIcon()
                                         6 -> TagWithLeadingTrailingIcon()
                                         7 -> BorderTag()
                                         8 -> ShadowTag()
+                                        9 -> DefaultTagViewContainer()
                                     }
                                 }
                             },
@@ -283,4 +288,36 @@ fun ShadowTag() {
         text = stringResource(id = co.yml.coreui.feature.ytag.R.string.tag_shadow),
         tagViewModifiers = tagViewModifiers
     )
+}
+
+@Composable
+fun DefaultTagViewContainer(){
+    val tagViewModifiers = TagViewModifiers.Builder()
+        .shape(CircleShape)
+        .backgroundColor(Color.Black)
+        .textColor(Color.White)
+        .style(textStyle)
+        .build()
+
+    val tagViewData = listOf(
+        TagViewData("Tag view 1", tagViewModifiers),
+        TagViewData("Tag view 2", tagViewModifiers),
+        TagViewData("Tag view 3", tagViewModifiers),
+//        TagViewData("Tag view 4", tagViewModifiers),
+//        TagViewData("Tag view 5", tagViewModifiers),
+//        TagViewData("Tag view 6", tagViewModifiers),
+//        TagViewData("Tag view 7", tagViewModifiers)
+    )
+
+    val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
+        .width(220.dp)
+        .height(100.dp)
+        .containerPaddingValues(PaddingValues(8.dp))
+        .enableBorder(true)
+        .shape(RoundedCornerShape(4.dp))
+        .tagSpacingVertical(16.dp)
+        .tagSpacingHorizontal(8.dp)
+        .build()
+
+    TagViewContainer(tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers)
 }
