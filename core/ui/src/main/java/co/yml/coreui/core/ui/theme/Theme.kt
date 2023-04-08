@@ -1,73 +1,56 @@
 package co.yml.coreui.core.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColorScheme(
-    primary = Purple200,
-    onPrimary = Purple700,
-    secondary = Teal200
+private val DarkColorPalette = darkColors(
+    background = DarkGrey,
+    primary = DarkGrey,
+    text = DarkGrey,
+    button = Color.White
 )
 
-private val LightColorPalette = lightColorScheme(
-    primary = Purple500,
-    onPrimary = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
+private val LightColorPalette = lightColors(
     background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = Color.White,
+    text = Color.White,
+    button = DarkGrey
 )
 
-var appDimensions = compositionLocalOf { AppDimensions() }
+object CoreUICatalogTheme {
 
-val dimensions: AppDimensions
-    @Composable
-    @ReadOnlyComposable
-    get() = appDimensions.current
+    val colors: CoreUICatalogColors
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalColors.current
 
-val appButtonColors: ButtonColors
-    @Composable
-    get() = ButtonDefaults.buttonColors(
-        containerColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
-        contentColor = if (isSystemInDarkTheme()) Color.Black else Color.White,
-        disabledContainerColor = Color.Gray,
-        disabledContentColor = Color.LightGray
-    )
+    val typography: CoreUICatalogTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTypography.current
 
-/**
- * Y template theme
- *
- * @param darkTheme
- * @param content
- * @receiver
- */
+    val shapes: CoreUICatalogShapes
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalShapes.current
+}
+
 @Composable
-fun CoreUICatalogTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+fun CoreUICatalogTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    typography: CoreUICatalogTypography = CoreUICatalogTheme.typography,
+    shapes: CoreUICatalogShapes = CoreUICatalogTheme.shapes,
+    content: @Composable () -> Unit
+) {
+    val colors = if (darkTheme) DarkColorPalette else LightColorPalette
+    CompositionLocalProvider(
+        LocalColors provides colors,
+        LocalShapes provides shapes,
+        LocalTypography provides typography
+    ) {
+        content()
     }
-
-    MaterialTheme(
-        colorScheme = colors,
-        typography = Typography,
-        shapes = Shapes(),
-        content = content
-    )
 }

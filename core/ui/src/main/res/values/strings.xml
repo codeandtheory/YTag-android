@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="delete">Delete</string>
+    <string name="app_name">CoreUICatalogApp</string>
+    <string name="title_y_tag">Tags</string>
 </resources>

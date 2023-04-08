@@ -67,7 +67,6 @@ gradlePlugin {
             implementationClass = "conventions.FeatureConventionPlugin"
         }
 
-
         register("androidHilt") {
             id = "co.yml.coreui.hilt"
             implementationClass = "conventions.HiltConventionPlugin"
@@ -76,26 +75,6 @@ gradlePlugin {
         register("androidTest") {
             id = "co.yml.coreui.test"
             implementationClass = "conventions.AndroidTestConventionPlugin"
-        }
-
-        register("analytics") {
-            id = "co.yml.coreui.analytics"
-            implementationClass = "conventions.AnalyticsConventionPlugin"
-        }
-
-        register("analyticsTest") {
-            id = "co.yml.coreui.analytics.test"
-            implementationClass = "conventions.AnalyticsTestConventionPlugin"
-        }
-
-        register("firebase") {
-            id = "co.yml.coreui.firebase"
-            implementationClass = "conventions.FirebaseConventionPlugin"
-        }
-
-        register("firebaseTest") {
-            id = "co.yml.coreui.firebase.test"
-            implementationClass = "conventions.FirebaseTestConventionPlugin"
         }
     }
 }

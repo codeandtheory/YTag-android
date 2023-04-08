@@ -8,6 +8,8 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 import co.yml.coreui.configureFlavors
 import co.yml.coreui.configureKotlinAndroid
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.kotlin
 
 /**
  * Application convention plugin

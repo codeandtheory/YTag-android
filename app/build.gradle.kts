@@ -20,14 +20,14 @@ dependencies {
     implementation(versionCatalogLibs.androidx.lifecycle.viewModelCompose)
 
     implementation(project(mapOf("path" to ":core:ui")))
-    implementation(project(mapOf("path" to ":feature:post")))
+    implementation(project(mapOf("path" to ":feature:ytag")))
 
     androidTestImplementation(versionCatalogLibs.androidx.test.core)
     androidTestImplementation(versionCatalogLibs.androidx.test.core.ktx)
     androidTestImplementation(versionCatalogLibs.androidx.test.ext)
     androidTestImplementation(versionCatalogLibs.androidx.test.runner)
     androidTestImplementation(versionCatalogLibs.androidx.test.rules)
+    debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose.ui.testing}")
 
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${versionCatalogLibs.versions.compose}")
     androidTestImplementation(project(mapOf("path" to ":core:test")))
 }

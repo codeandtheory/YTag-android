@@ -9,8 +9,7 @@ plugins {
 
 private val excludedFiles = mutableSetOf(
     "**/co.yml.coreui/core/common/model/*",
-    "**/co.yml.coreui/core/common/di/*",
-    "**/co.yml.coreui/core/common/AppResult.*"
+    "**/co.yml.coreui/core/common/di/*"
 )
 private val limits = mutableMapOf(
     "instruction" to 0.0,
