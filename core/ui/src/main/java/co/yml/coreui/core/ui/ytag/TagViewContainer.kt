@@ -11,7 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -31,22 +35,16 @@ fun TagViewContainer(
     tagViewData: List<TagViewData>,
     tagViewContainerModifiers: TagViewContainerModifiers
 ) {
+    //add more tag into the list
     val updatedTagViewData = tagViewData.toMutableList()
-    val moreTagModifier = TagViewModifiers.Builder()
-        .shape(CircleShape)
-        .backgroundColor(Color.Black)
-        .textColor(Color.White)
-        .build()
-
-    updatedTagViewData.add(TagViewData("More", moreTagModifier))
+    val moreTag = tagViewContainerModifiers.moreTagConfiguration
+    updatedTagViewData.add(moreTag)
 
     with(tagViewContainerModifiers) {
         val modifier = Modifier
+        val context = LocalContext.current
         Box(
             modifier = modifier
-                .width(width = width ?: Dp.Unspecified)
-                .height(height = height)
-                .defaultMinSize(minWidth = minWidth, minHeight = minHeight)
                 .run {
                     if (enableBorder) {
                         border(
@@ -58,25 +56,39 @@ fun TagViewContainer(
                         background(color = backgroundColor, shape = shape)
                     }
                 }
+                .width(width = width ?: Dp.Unspecified)
+                .height(height = height)
+                .defaultMinSize(minWidth = minWidth, minHeight = minHeight)
                 .clickable { }
+                .semantics {
+                    this.contentDescription =
+                        context.getString(co.yml.coreui.ui.R.string.tag_view_container_accessibility_title)
+                }
                 .testTag("tag_view_container")
-                .padding(containerPaddingValues)
                 .background(
                     color = backgroundColor,
                     shape = shape
                 )
+                .padding(containerPaddingValues)
         ) {
+
+
             TagViewContainerLayout(
                 tagViewContainerModifiers = tagViewContainerModifiers,
                 content = {
                     updatedTagViewData.forEach {
                         with(it) {
+                            val containerItemClick = {
+                                tagViewContainerModifiers.onClick.invoke(it)
+                            }
                             TagView(
                                 text = text,
                                 leadingIcon = leadingIcon,
                                 trailingIcon = trailingIcon,
                                 enabled = enabled,
-                                tagViewModifiers = tagViewModifiers
+                                tagViewModifiers = tagViewModifiers,
+                                overFlowText = "",
+                                onClick = containerItemClick
                             )
                         }
                     }
@@ -104,12 +116,9 @@ fun TagViewContainerLayout(
         var currentRow = 0
         var currentOffset = IntOffset.Zero
 
-        //todo sree_ check whether the padding is correct
-
         val placeAbles = measurables.map { measurable ->
-            val placeAble = measurable.measure(looseConstraints)
+            val placeAble: Placeable = measurable.measure(looseConstraints)
 
-            //todo sree_ is horizontal and vertical space [surface] required
             if (currentOffset.x > 0f && currentOffset.x + placeAble.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
                     .toInt() > constraints.maxWidth
             ) {
@@ -178,6 +187,10 @@ fun TagViewContainerLayout(
                             //check space to accommodate more tag
                             Log.i("check_placeable", "index: $index next item has no space")
                             val moreTagPlaceAble = placeAbles.last()
+                            val remainingTags = placeAbles.lastIndex - 1 - index
+
+
+//                            tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
                             val moreTagHorizontalSpace =
                                 moreTagPlaceAble.first.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
                                     .toInt()
@@ -199,6 +212,7 @@ fun TagViewContainerLayout(
                     //current item has no space
                     //check space to accommodate more tag
                     Log.i("check_placeable", "index: $index current item has no space")
+                    val remainingTags = placeAbles.lastIndex - 1 - index
                     val moreTagPlaceAble = placeAbles.last()
                     val moreTagHorizontalSpace =
                         moreTagPlaceAble.first.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
@@ -225,6 +239,66 @@ fun TagViewContainerLayout(
 @Composable
 fun DefaultTagContainer() {
     val tagViewModifiers = TagViewModifiers.Builder()
+        .shape(CircleShape)
+        .backgroundColor(Color.Black)
+        .textColor(Color.White)
+        .build()
+    val tagViewData = listOf(
+        TagViewData(text = "Tag 1", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 2", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 3", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 4", tagViewModifiers = tagViewModifiers)
+    )
+
+    val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
+        .shape(RoundedCornerShape(10.dp))
+        .width(200.dp)
+        .height(120.dp)
+        .build()
+
+    TagViewContainer(
+        tagViewData = tagViewData,
+        tagViewContainerModifiers = tagViewContainerModifiers
+    )
+}
+
+@Preview(name = "Tag container with border")
+@Composable
+fun BorderTagContainer() {
+    val tagViewModifiers = TagViewModifiers.Builder()
+        .shape(CircleShape)
+        .backgroundColor(Color.Black)
+        .textColor(Color.White)
+        .build()
+    val tagViewData = listOf(
+        TagViewData(text = "Tag 1", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 2", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 3", tagViewModifiers = tagViewModifiers),
+        TagViewData(text = "Tag 4", tagViewModifiers = tagViewModifiers)
+    )
+
+    val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
+        .shape(RoundedCornerShape(10.dp))
+        .width(200.dp)
+        .height(120.dp)
+        .enableBorder(true)
+        .borderColor(Color.Red)
+        .borderWidth(1.dp)
+        .build()
+
+    TagViewContainer(
+        tagViewData = tagViewData,
+        tagViewContainerModifiers = tagViewContainerModifiers
+    )
+}
+
+@Preview(name = "Tag container with background")
+@Composable
+fun BackgroundTagContainer() {
+    val tagViewModifiers = TagViewModifiers.Builder()
+        .shape(CircleShape)
+        .backgroundColor(Color.Black)
+        .textColor(Color.White)
         .build()
     val tagViewData = listOf(
         TagViewData(text = "Tag 1", tagViewModifiers = tagViewModifiers),
@@ -236,6 +310,8 @@ fun DefaultTagContainer() {
     val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
         .shape(RoundedCornerShape(10.dp))
         .backgroundColor(Color.Gray)
+        .width(200.dp)
+        .height(120.dp)
         .build()
 
     TagViewContainer(

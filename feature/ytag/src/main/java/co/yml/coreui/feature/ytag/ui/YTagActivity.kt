@@ -1,6 +1,7 @@
 package co.yml.coreui.feature.ytag.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -297,6 +298,10 @@ fun DefaultTagViewContainer(){
         .backgroundColor(Color.Black)
         .textColor(Color.White)
         .style(textStyle)
+        .onCLick {
+            Log.i("check_click","tag view clicked")
+            //remove the current tag view from the list
+        }
         .build()
 
     val tagViewData = listOf(
@@ -317,6 +322,19 @@ fun DefaultTagViewContainer(){
         .shape(RoundedCornerShape(4.dp))
         .tagSpacingVertical(16.dp)
         .tagSpacingHorizontal(8.dp)
+        .moreTagConfiguration(TagViewData(text = "more ...", overFlowText = {count ->
+            "$count more items"
+        }, tagViewModifiers = TagViewModifiers.Builder().onCLick {  Log.i("check_click","more tag clicked") }.build()))
+        .onCLick {item ->
+            val itemIndex = tagViewData.indexOf(item)
+            val updatedList =  tagViewData.toMutableList()
+
+            if (itemIndex!= -1){
+                updatedList.removeAt(itemIndex)
+            }
+
+            Log.i("check_click","tag view container item $itemIndex  nam: ${item.text} clicked currentList size: ${tagViewData.size} updatedList size: ${updatedList.size}")
+        }
         .build()
 
     TagViewContainer(tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers)

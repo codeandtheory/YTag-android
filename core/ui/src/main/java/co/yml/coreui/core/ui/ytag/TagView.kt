@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.yml.coreui.core.ui.ytag.model.TagViewData
 import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
 
 /**
@@ -38,7 +39,9 @@ fun TagView(
     leadingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
     trailingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
     enabled: Boolean = true,
-    tagViewModifiers: TagViewModifiers = TagViewModifiers.Builder().build()
+    tagViewModifiers: TagViewModifiers = TagViewModifiers.Builder().build(),
+    overFlowText: String = "",
+    onClick: () -> Unit = {}
 ) {
     with(tagViewModifiers) {
         Surface(
@@ -66,6 +69,7 @@ fun TagView(
                     .clickable {
                         if (enabled) {
                             onClick.invoke()
+                            tagViewModifiers.onClick.invoke()
                         }
                     }
                     .defaultMinSize(minWidth = minWidth, minHeight = minHeight)
@@ -79,7 +83,7 @@ fun TagView(
                 leadingIcon?.invoke(enabled)
 
                 Text(
-                    text = text,
+                    text = overFlowText.ifEmpty { text },
                     color = textColor,
                     fontSize = fontSize,
                     fontWeight = fontWeight,

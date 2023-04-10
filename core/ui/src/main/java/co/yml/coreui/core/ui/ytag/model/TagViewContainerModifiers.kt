@@ -1,6 +1,7 @@
 package co.yml.coreui.core.ui.ytag.model
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
@@ -36,7 +37,9 @@ data class TagViewContainerModifiers(
     val shape: Shape,
     val containerPaddingValues: PaddingValues,
     val tagSpacingHorizontal: Dp,
-    val tagSpacingVertical: Dp
+    val tagSpacingVertical: Dp,
+    val moreTagConfiguration: TagViewData,
+    val onClick: (TagViewData) -> Unit
 ) {
     //todo sree_ check min and max default size
     class Builder {
@@ -49,10 +52,19 @@ data class TagViewContainerModifiers(
         private var borderColor: Color = Color.Black
         private var backgroundColor: Color = Color.White
         private var shape: Shape = RectangleShape
-        private var containerPaddingValues: PaddingValues = PaddingValues(horizontal = 4.dp, vertical = 4.dp)
+        private var containerPaddingValues: PaddingValues =
+            PaddingValues(horizontal = 4.dp, vertical = 4.dp)
         private var tagSpacingHorizontal: Dp = 8.dp
         private var tagSpacingVertical: Dp = 8.dp
-
+        private var moreTagConfiguration: TagViewData = TagViewData(
+            text = "more",
+            tagViewModifiers = TagViewModifiers.Builder()
+                .shape(CircleShape)
+                .backgroundColor(Color.Black)
+                .textColor(Color.White)
+                .build()
+        )
+        private var onClick: (TagViewData) -> Unit = {}
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -80,6 +92,11 @@ data class TagViewContainerModifiers(
 
         fun tagSpacingVertical(space: Dp) = apply { this.tagSpacingVertical = space }
 
+        fun moreTagConfiguration(configuration: TagViewData) =
+            apply { this.moreTagConfiguration = configuration }
+
+        fun onCLick(onClick: (TagViewData) -> Unit) = apply { this.onClick = onClick }
+
         fun build() = TagViewContainerModifiers(
             minWidth,
             minHeight,
@@ -92,7 +109,9 @@ data class TagViewContainerModifiers(
             shape,
             containerPaddingValues,
             tagSpacingHorizontal,
-            tagSpacingVertical
+            tagSpacingVertical,
+            moreTagConfiguration,
+            onClick
         )
     }
 }

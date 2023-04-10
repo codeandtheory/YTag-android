@@ -13,8 +13,9 @@ import androidx.compose.runtime.Composable
  */
 data class TagViewData(
     val text: String,
-    val tagViewModifiers: TagViewModifiers,
+    val tagViewModifiers: TagViewModifiers = TagViewModifiers.Builder().build(),
     val leadingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
     val trailingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
-    val enabled: Boolean = true
+    val enabled: Boolean = true,
+    val overFlowText: (Int) -> String =  { _ -> "" }
 )
