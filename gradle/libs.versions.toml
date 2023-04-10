@@ -23,6 +23,7 @@ androidxTestRunner = "1.5.1"
 androidxTestMonitor = "1.6.0"
 androidxTestCore = "1.4.0"
 androidxTestExt = "1.1.4"
+constraintlayout = "1.0.1"
 
 #hilt
 hilt = "2.44"
@@ -94,6 +95,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxNavigation" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayout" }
 
 #hilt
 hilt_compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
@@ -130,7 +132,7 @@ test_runner = { module = "androidx.test:runner", version.ref = "test_runner" }
 
 [bundles]
 # Define bundles/groups of libraries
-compose = ["androidx.activity.compose", "androidx.compose.foundation", "androidx.navigation.compose", "androidx.compose.material3", "androidx.compose.material3.windowSizeClass", "androidx.compose.runtime","androidx.compose.ui.tooling","androidx.compose.ui.tooling.preview"]
+compose = ["androidx.activity.compose", "androidx.compose.foundation", "androidx.navigation.compose", "androidx.compose.material3", "androidx.compose.material3.windowSizeClass", "androidx.compose.runtime","androidx.compose.ui.tooling","androidx.compose.ui.tooling.preview", "androidx.constraintlayout"]
 test = ["androidx.test.core","androidx.test.ext","androidx.test.rules","androidx.test.runner", "compose_ui_testing"]
 coroutine_test = ["coroutine.test", "coroutine.turbine"]
 hilt = ["hilt.compiler","hilt.android","hilt.test"]

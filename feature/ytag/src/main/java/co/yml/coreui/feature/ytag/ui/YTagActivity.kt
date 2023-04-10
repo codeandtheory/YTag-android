@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -104,6 +105,7 @@ fun DefaultTag() {
 @Composable
 fun CapsuleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -119,6 +121,7 @@ fun CapsuleTag() {
 @Composable
 fun RectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
         .shape(RectangleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -135,6 +138,7 @@ fun RectangleTag() {
 fun RoundRectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
         .shape(RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)))
+        .width(100.dp)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
         .style(textStyle)
@@ -150,6 +154,9 @@ fun RoundRectangleTag() {
 fun TagWithLeadingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
+        .maxLines(1)
+        .overFlow(TextOverflow.Ellipsis)
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -178,6 +185,10 @@ fun TagWithLeadingIcon() {
 fun TagWithTrailingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
+        .maxLines(1)
+        .textAlign(TextAlign.Start)
+        .overFlow(TextOverflow.Ellipsis)
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -206,6 +217,9 @@ fun TagWithTrailingIcon() {
 fun TagWithLeadingTrailingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
+        .maxLines(1)
+        .overFlow(TextOverflow.Ellipsis)
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .maxLines(1)
@@ -258,6 +272,7 @@ fun TagWithLeadingTrailingIcon() {
 @Composable
 fun BorderTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
         .textColor(Color.Black)
         .enableBorder(true)
         .borderColor(Color.Red)
@@ -276,6 +291,7 @@ fun BorderTag() {
 @Composable
 fun ShadowTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
+        .width(100.dp)
         .textColor(colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_text_color))
         .backgroundColor(colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_background_color))
         .shape(CircleShape)
@@ -295,9 +311,12 @@ fun ShadowTag() {
 fun DefaultTagViewContainer() {
     val tagViewModifiers = TagViewModifiers.Builder()
         .shape(CircleShape)
+        .width(100.dp)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
         .style(textStyle)
+        .maxLines(1)
+        .overFlow(TextOverflow.Ellipsis)
         .onCLick {
             Log.i("check_click", "tag view clicked")
             //remove the current tag view from the list
@@ -307,6 +326,7 @@ fun DefaultTagViewContainer() {
     val tagViewData = listOf(
         TagViewData("Tag view 1", tagViewModifiers),
         TagViewData("Tag  2", TagViewModifiers.Builder()
+            .width(100.dp)
             .shape(CircleShape)
             .backgroundColor(Color.Black)
             .textColor(Color.White)
@@ -342,9 +362,11 @@ fun DefaultTagViewContainer() {
             TagViewData(
                 text = "more",
                 overFlowText = { count ->
+                    Log.i("check_over_flow","remaining tags: $count")
                     "$count more items"
                 },
                 tagViewModifiers = TagViewModifiers.Builder().backgroundColor(Color.Gray)
+                    .width(100.dp)
                     .textColor(Color.White)
                     .onCLick { Log.i("check_click", "more tag clicked") }.build()
             )

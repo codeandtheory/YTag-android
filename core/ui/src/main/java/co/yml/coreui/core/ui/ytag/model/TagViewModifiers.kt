@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
  * @param shadowElevation  The size of the shadow below the surface.
  * @param containerPaddingValues define padding for TagView
  * @param onClick perform click event
+ * @param semantics add content description for tag view
  */
 data class TagViewModifiers(
     val minWidth: Dp,

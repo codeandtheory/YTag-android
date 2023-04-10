@@ -222,7 +222,6 @@ fun showOverFlow(
 
     if (tagViewContainerModifiers.moreTagConfiguration.showOverFlow) {
         val moreTagPlaceAble = placeAbles.last()
-        val remainingTags = placeAbles.lastIndex - 1 - index
 
         if (offset.x + moreTagPlaceAble.first.width < constraints.maxWidth && offset.y + moreTagPlaceAble.first.height < constraints.maxHeight) {
             //place more tag
@@ -238,10 +237,13 @@ fun showOverFlow(
                 val moreTagYOffset = previousOffset.y
 
                 if (moreTagXOffset + moreTagPlaceAble.first.width < constraints.maxWidth && moreTagYOffset + moreTagPlaceAble.first.height < constraints.maxHeight) {
+                    val remainingTags = placeAbles.lastIndex - index
+                    tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
                     return Pair(moreTagPlaceAble.first, IntOffset(moreTagXOffset, moreTagYOffset))
                 }
             }
-
+            val remainingTags = placeAbles.lastIndex - index
+            tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
             return moreTagPlaceAble
         }
     } else {

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
  * @param containerPaddingValues define padding for TagViewContainer
  * @param tagSpacingHorizontal horizontal padding between tag views
  * @param tagSpacingVertical vertical padding between tag views
- *
+ * @param semantics add content description for tag view container
  */
 data class TagViewContainerModifiers(
     val minWidth: Dp,
