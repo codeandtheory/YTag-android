@@ -306,8 +306,17 @@ fun DefaultTagViewContainer() {
 
     val tagViewData = listOf(
         TagViewData("Tag view 1", tagViewModifiers),
-        TagViewData("Tag view 2", tagViewModifiers),
-        TagViewData("Tag view 3", tagViewModifiers),
+        TagViewData("Tag  2", TagViewModifiers.Builder()
+            .shape(CircleShape)
+            .backgroundColor(Color.Black)
+            .textColor(Color.White)
+            .style(textStyle)
+            .semantics("second tag")
+            .onCLick {
+                Log.i("check_click", "tag view clicked")
+            }
+            .build()),
+        TagViewData("Tag 3", tagViewModifiers),
         TagViewData("Tag view 4", tagViewModifiers),
         TagViewData("Tag view 5", tagViewModifiers),
         TagViewData("Tag view 6", tagViewModifiers),

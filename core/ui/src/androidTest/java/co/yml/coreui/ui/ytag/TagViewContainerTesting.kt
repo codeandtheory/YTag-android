@@ -85,7 +85,7 @@ class TagViewContainerTesting {
     fun tagViewContainer_tags_shown(){
         launchTagViewContainer()
 
-        composeTestRule.onNodeWithContentDescription("Tag 1").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Tag 1").assertIsDisplayed()
     }
 
     @Test
@@ -97,6 +97,6 @@ class TagViewContainerTesting {
 
         launchTagViewContainer(tagViewContainerModifiers)
 
-        composeTestRule.onNodeWithContentDescription("more").assertIsDisplayed()
+        composeTestRule.onNodeWithText("more").assertIsDisplayed()
     }
 }

@@ -96,7 +96,7 @@ fun TagView(
                         )
                         .align(Alignment.CenterVertically)
                         .semantics {
-                            this.contentDescription = text
+                            this.contentDescription = semantics
                         },
                     style = style,
                     textDecoration = textDecoration,

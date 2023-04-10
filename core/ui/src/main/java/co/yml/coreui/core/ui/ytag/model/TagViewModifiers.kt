@@ -79,7 +79,8 @@ data class TagViewModifiers(
     val tonalElevation: Dp,
     val shadowElevation: Dp,
     val containerPaddingValues: PaddingValues,
-    val onClick: () -> Unit
+    val onClick: () -> Unit,
+    val semantics: String
 ) {
     class Builder {
         private var minWidth: Dp = 52.dp
@@ -111,6 +112,7 @@ data class TagViewModifiers(
         private var shadowElevation: Dp = 0.dp
         private var containerPaddingValues: PaddingValues = PaddingValues(horizontal = 4.dp)
         private var onClick: () -> Unit = {}
+        private var semantics: String = text
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -166,6 +168,8 @@ data class TagViewModifiers(
             apply { this.containerPaddingValues = paddingValues }
 
         fun onCLick(onClick: () -> Unit) = apply { this.onClick = onClick }
+
+        fun semantics(semantics: String) = apply { this.semantics = semantics }
         fun build() = TagViewModifiers(
             minWidth,
             minHeight,
@@ -194,7 +198,8 @@ data class TagViewModifiers(
             tonalElevation,
             shadowElevation,
             containerPaddingValues,
-            onClick
+            onClick,
+            semantics
         )
     }
 }

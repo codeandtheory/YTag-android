@@ -39,7 +39,8 @@ data class TagViewContainerModifiers(
     val tagSpacingHorizontal: Dp,
     val tagSpacingVertical: Dp,
     val moreTagConfiguration: TagViewData,
-    val onClick: (TagViewData) -> Unit
+    val onClick: (TagViewData) -> Unit,
+    val semantics: String
 ) {
     //todo sree_ check min and max default size
     class Builder {
@@ -65,6 +66,7 @@ data class TagViewContainerModifiers(
                 .build()
         )
         private var onClick: (TagViewData) -> Unit = {}
+        private var semantics: String = ""
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -97,6 +99,8 @@ data class TagViewContainerModifiers(
 
         fun onCLick(onClick: (TagViewData) -> Unit) = apply { this.onClick = onClick }
 
+        fun semantics(semantics: String) = apply { this.semantics = semantics }
+
         fun build() = TagViewContainerModifiers(
             minWidth,
             minHeight,
@@ -111,7 +115,8 @@ data class TagViewContainerModifiers(
             tagSpacingHorizontal,
             tagSpacingVertical,
             moreTagConfiguration,
-            onClick
+            onClick,
+            semantics
         )
     }
 }
