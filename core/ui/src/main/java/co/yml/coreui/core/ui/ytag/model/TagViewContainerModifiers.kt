@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 data class TagViewContainerModifiers(
     val minWidth: Dp,
     val minHeight: Dp,
-    val width: Dp?,
+    val width: Dp,
     val height: Dp,
     val enableBorder: Boolean,
     val borderWidth: Dp,
@@ -45,8 +45,8 @@ data class TagViewContainerModifiers(
     class Builder {
         private var minWidth: Dp = 150.dp
         private var minHeight: Dp = 150.dp
-        private var width: Dp? = null
-        private var height: Dp = minHeight
+        private var width: Dp = Dp.Unspecified
+        private var height: Dp =  Dp.Unspecified
         private var enableBorder: Boolean = false
         private var borderWidth: Dp = 1.dp
         private var borderColor: Color = Color.Black

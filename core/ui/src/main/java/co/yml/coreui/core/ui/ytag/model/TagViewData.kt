@@ -17,5 +17,6 @@ data class TagViewData(
     val leadingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
     val trailingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
     val enabled: Boolean = true,
+    val showOverFlow: Boolean = true,
     val overFlowText: (Int) -> String =  { _ -> "" }
 )

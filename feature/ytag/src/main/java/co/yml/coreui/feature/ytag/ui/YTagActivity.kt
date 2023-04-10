@@ -32,12 +32,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.yml.coreui.core.ui.templates.AppBarWithBackButton
 import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
-import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
-import co.yml.coreui.ui.R
 import co.yml.coreui.core.ui.ytag.TagView
 import co.yml.coreui.core.ui.ytag.TagViewContainer
 import co.yml.coreui.core.ui.ytag.model.TagViewContainerModifiers
 import co.yml.coreui.core.ui.ytag.model.TagViewData
+import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
+import co.yml.coreui.ui.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterial3Api
@@ -292,14 +292,14 @@ fun ShadowTag() {
 }
 
 @Composable
-fun DefaultTagViewContainer(){
+fun DefaultTagViewContainer() {
     val tagViewModifiers = TagViewModifiers.Builder()
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
         .style(textStyle)
         .onCLick {
-            Log.i("check_click","tag view clicked")
+            Log.i("check_click", "tag view clicked")
             //remove the current tag view from the list
         }
         .build()
@@ -308,34 +308,55 @@ fun DefaultTagViewContainer(){
         TagViewData("Tag view 1", tagViewModifiers),
         TagViewData("Tag view 2", tagViewModifiers),
         TagViewData("Tag view 3", tagViewModifiers),
-//        TagViewData("Tag view 4", tagViewModifiers),
-//        TagViewData("Tag view 5", tagViewModifiers),
-//        TagViewData("Tag view 6", tagViewModifiers),
-//        TagViewData("Tag view 7", tagViewModifiers)
+        TagViewData("Tag view 4", tagViewModifiers),
+        TagViewData("Tag view 5", tagViewModifiers),
+        TagViewData("Tag view 6", tagViewModifiers),
+        TagViewData("Tag view 7", tagViewModifiers),
+        TagViewData("Tag view 8", tagViewModifiers),
+        TagViewData("Tag view 9", tagViewModifiers),
+        TagViewData("Tag view 10", tagViewModifiers),
+        TagViewData("Tag view 11", tagViewModifiers),
+        TagViewData("Tag view 12", tagViewModifiers),
+        TagViewData("Tag view 13", tagViewModifiers)
     )
 
     val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
-        .width(220.dp)
-        .height(100.dp)
         .containerPaddingValues(PaddingValues(8.dp))
         .enableBorder(true)
         .shape(RoundedCornerShape(4.dp))
-        .tagSpacingVertical(16.dp)
+        .tagSpacingVertical(8.dp)
         .tagSpacingHorizontal(8.dp)
-        .moreTagConfiguration(TagViewData(text = "more ...", overFlowText = {count ->
-            "$count more items"
-        }, tagViewModifiers = TagViewModifiers.Builder().onCLick {  Log.i("check_click","more tag clicked") }.build()))
-        .onCLick {item ->
+        .backgroundColor(Color.Gray)
+        .width(250.dp)
+        .height(250.dp)
+        .moreTagConfiguration(
+            TagViewData(
+                text = "more",
+                overFlowText = { count ->
+                    "$count more items"
+                },
+                tagViewModifiers = TagViewModifiers.Builder().backgroundColor(Color.Gray)
+                    .textColor(Color.White)
+                    .onCLick { Log.i("check_click", "more tag clicked") }.build()
+            )
+        )
+        .onCLick { item ->
             val itemIndex = tagViewData.indexOf(item)
-            val updatedList =  tagViewData.toMutableList()
+            val updatedList = tagViewData.toMutableList()
 
-            if (itemIndex!= -1){
+            if (itemIndex != -1) {
                 updatedList.removeAt(itemIndex)
             }
 
-            Log.i("check_click","tag view container item $itemIndex  nam: ${item.text} clicked currentList size: ${tagViewData.size} updatedList size: ${updatedList.size}")
+            Log.i(
+                "check_click",
+                "tag view container item $itemIndex  name: ${item.text} clicked currentList size: ${tagViewData.size} updatedList size: ${updatedList.size}"
+            )
         }
         .build()
 
-    TagViewContainer(tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers)
+    TagViewContainer(
+        tagViewData = tagViewData,
+        tagViewContainerModifiers = tagViewContainerModifiers
+    )
 }

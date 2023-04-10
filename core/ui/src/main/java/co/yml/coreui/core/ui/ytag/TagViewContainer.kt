@@ -13,13 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.*
 import co.yml.coreui.core.ui.ytag.model.TagViewContainerModifiers
 import co.yml.coreui.core.ui.ytag.model.TagViewData
 import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
@@ -41,38 +40,48 @@ fun TagViewContainer(
     updatedTagViewData.add(moreTag)
 
     with(tagViewContainerModifiers) {
-        val modifier = Modifier
         val context = LocalContext.current
+        var modifier = if (tagViewContainerModifiers.width != Dp.Unspecified) {
+            Modifier.width(tagViewContainerModifiers.width)
+        } else {
+            Modifier.wrapContentWidth()
+        }
+
+        modifier = if (tagViewContainerModifiers.height != Dp.Unspecified) {
+            modifier.then(Modifier.height(tagViewContainerModifiers.height))
+        } else {
+            modifier.then(Modifier.wrapContentHeight())
+        }
+
+        modifier = modifier.then(Modifier
+            .run {
+                if (enableBorder) {
+                    border(
+                        width = borderWidth,
+                        color = borderColor,
+                        shape = shape
+                    )
+                } else {
+                    background(color = backgroundColor, shape = shape)
+                }
+            }
+            .defaultMinSize(minWidth, minHeight)
+            .clickable { }
+            .semantics {
+                this.contentDescription =
+                    context.getString(co.yml.coreui.ui.R.string.tag_view_container_accessibility_title)
+            }
+            .testTag("tag_view_container")
+            .background(
+                color = backgroundColor,
+                shape = shape
+            )
+            .padding(containerPaddingValues)
+        )
+
         Box(
             modifier = modifier
-                .run {
-                    if (enableBorder) {
-                        border(
-                            width = borderWidth,
-                            color = borderColor,
-                            shape = shape
-                        )
-                    } else {
-                        background(color = backgroundColor, shape = shape)
-                    }
-                }
-                .width(width = width ?: Dp.Unspecified)
-                .height(height = height)
-                .defaultMinSize(minWidth = minWidth, minHeight = minHeight)
-                .clickable { }
-                .semantics {
-                    this.contentDescription =
-                        context.getString(co.yml.coreui.ui.R.string.tag_view_container_accessibility_title)
-                }
-                .testTag("tag_view_container")
-                .background(
-                    color = backgroundColor,
-                    shape = shape
-                )
-                .padding(containerPaddingValues)
         ) {
-
-
             TagViewContainerLayout(
                 tagViewContainerModifiers = tagViewContainerModifiers,
                 content = {
@@ -107,6 +116,8 @@ fun TagViewContainerLayout(
     tagViewContainerModifiers: TagViewContainerModifiers,
     content: @Composable () -> Unit
 ) {
+    val localDensity = LocalDensity.current
+
     Layout(content = content) { measurables, constraints ->
         val looseConstraints = constraints.copy(
             minWidth = 0,
@@ -138,8 +149,6 @@ fun TagViewContainerLayout(
                             .toInt()
                     )
             }
-            Log.i("check_measure", "common: ${currentOffset}")
-
             placeAble to currentOffset.also {
                 currentOffset = it.copy(
                     x = it.x + placeAble.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
@@ -148,34 +157,25 @@ fun TagViewContainerLayout(
             }
         }
 
-        layout(width = constraints.maxWidth,
-            height = placeAbles.lastOrNull()?.run { first.height } ?: 0) {
+        layout(
+            width = constraints.maxWidth,
+            height = constraints.maxHeight
+        ) {
             Log.i("check_placeAble", "size: ${placeAbles.size}")
             placeAbles.forEachIndexed { index, placeable ->
                 val (placeable, offset) = placeable
                 //check whether current item has enough space
-                val currentItemHorizontalSpace =
-                    placeable.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
-                        .toInt()
-                val currentItemVerticalSpace =
-                    placeable.height + tagViewContainerModifiers.tagSpacingVertical.toPx()
-                        .toInt()
-
-                if (offset.x + currentItemHorizontalSpace < constraints.maxWidth && offset.y + currentItemVerticalSpace < constraints.maxHeight) {
+                if (offset.x + placeable.width < constraints.maxWidth && offset.y + placeable.height < constraints.maxHeight) {
                     //current item has space
                     Log.i("check_placeable", "index: $index current item has space")
                     val nextItemIndex = index + 1
                     if (nextItemIndex <= placeAbles.lastIndex) {
                         val nextItemOffset = placeAbles[nextItemIndex].second
-
-                        val nextItemHorizontalSpace =
-                            placeAbles[nextItemIndex].first.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
-                                .toInt()
-                        val nextItemVerticalSpace =
-                            placeAbles[nextItemIndex].first.height + tagViewContainerModifiers.tagSpacingVertical.toPx()
-                                .toInt()
-
-                        if (nextItemOffset.x + nextItemHorizontalSpace < constraints.maxWidth && nextItemOffset.y + nextItemVerticalSpace < constraints.maxHeight) {
+                        Log.i(
+                            "check_placeable",
+                            "next index: $nextItemIndex nextItemOffset : $nextItemOffset Before checking"
+                        )
+                        if (nextItemOffset.x + placeAbles[nextItemIndex].first.width < constraints.maxWidth && nextItemOffset.y + placeAbles[nextItemIndex].first.height < constraints.maxHeight) {
                             //next item has space
                             Log.i(
                                 "check_placeable",
@@ -185,54 +185,99 @@ fun TagViewContainerLayout(
                         } else {
                             //next item has no space
                             //check space to accommodate more tag
-                            Log.i("check_placeable", "index: $index next item has no space")
-                            val moreTagPlaceAble = placeAbles.last()
-                            val remainingTags = placeAbles.lastIndex - 1 - index
-
-
-//                            tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
-                            val moreTagHorizontalSpace =
-                                moreTagPlaceAble.first.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
-                                    .toInt()
-                            val moreTagVerticalSpace =
-                                moreTagPlaceAble.first.height + tagViewContainerModifiers.tagSpacingVertical.toPx()
-                                    .toInt()
-
-                            if (offset.x + moreTagHorizontalSpace < constraints.maxWidth && offset.y + moreTagVerticalSpace < constraints.maxHeight) {
-                                //place more tag
-                                Log.i("check_placeable", "index: $index more tag placed")
-                                moreTagPlaceAble.first.place(offset.x, offset.y)
-                                return@layout
-                            } else {
-                                Log.i("check_placeable", "index: $index more tag has no space")
+                            val overflow = showOverFlow(
+                                index,
+                                placeAbles,
+                                tagViewContainerModifiers,
+                                constraints,
+                                localDensity
+                            )
+                            overflow?.let {
+                                it.first.place(it.second)
                             }
+                            return@layout
                         }
                     }
                 } else {
                     //current item has no space
                     //check space to accommodate more tag
-                    Log.i("check_placeable", "index: $index current item has no space")
-                    val remainingTags = placeAbles.lastIndex - 1 - index
-                    val moreTagPlaceAble = placeAbles.last()
-                    val moreTagHorizontalSpace =
-                        moreTagPlaceAble.first.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
-                            .toInt()
-                    val moreTagVerticalSpace =
-                        moreTagPlaceAble.first.height + tagViewContainerModifiers.tagSpacingVertical.toPx()
-                            .toInt()
-
-                    if (offset.x + moreTagHorizontalSpace < constraints.maxWidth && offset.y + moreTagVerticalSpace < constraints.maxHeight) {
-                        //place more tag
-                        Log.i("check_placeable", "index: $index more tag placed")
-                        placeable.place(offset.x, offset.y)
-                        return@layout
-                    } else {
-                        Log.i("check_placeable", "index: $index more tag has no space")
+                    val overflow = showOverFlow(
+                        index,
+                        placeAbles,
+                        tagViewContainerModifiers,
+                        constraints,
+                        localDensity
+                    )
+                    overflow?.let {
+                        it.first.place(it.second)
                     }
+                    return@layout
                 }
             }
         }
     }
+}
+
+/**
+ * Used for displaying the over flow details when tags not fit in the container
+ * @param index current placeAble index
+ * @param placeAbles placeAble details of tags
+ * @param tagViewContainerModifiers  collection of modifier elements that decorate or add behavior to tag view container
+ * @param constraints immutable constraints for measuring layouts
+ * @param localDensity A density of the screen. Used for the conversions between pixels and Dp
+ */
+fun showOverFlow(
+    index: Int,
+    placeAbles: List<Pair<Placeable, IntOffset>>,
+    tagViewContainerModifiers: TagViewContainerModifiers,
+    constraints: Constraints,
+    localDensity: Density
+): Pair<Placeable, IntOffset>? {
+    val offset = placeAbles[index].second
+    val placeable = placeAbles[index]
+
+    if (tagViewContainerModifiers.moreTagConfiguration.showOverFlow) {
+        Log.i("check_placeable", "index: $index next item has no space")
+        val moreTagPlaceAble = placeAbles.last()
+        val remainingTags = placeAbles.lastIndex - 1 - index
+
+        if (offset.x + moreTagPlaceAble.first.width < constraints.maxWidth && offset.y + moreTagPlaceAble.first.height < constraints.maxHeight) {
+            //place more tag
+            Log.i(
+                "check_placeable",
+                "index: $index more tag placed offset: $offset"
+            )
+
+            //check whether more tag can be placed in between current and previous offset
+            val previousIndex = index - 1
+            if (previousIndex >= 0) {
+                val previousOffset = placeAbles[previousIndex].second
+                val previousTag = placeAbles[previousIndex].first
+
+                val moreTagXOffset =
+                    previousOffset.x + localDensity.run { tagViewContainerModifiers.tagSpacingHorizontal.toPx() }
+                        .toInt() + previousTag.width
+                val moreTagYOffset = previousOffset.y
+
+                if (moreTagXOffset + moreTagPlaceAble.first.width < constraints.maxWidth && moreTagYOffset + moreTagPlaceAble.first.height < constraints.maxHeight) {
+                    Log.i(
+                        "check_placeable",
+                        " prev index: $previousIndex more tag placed on in btw offset: $previousOffset"
+                    )
+
+                    return Pair(moreTagPlaceAble.first, IntOffset(moreTagXOffset, moreTagYOffset))
+                }
+            }
+
+            return moreTagPlaceAble
+        } else {
+            Log.i("check_placeable", "index: $index more tag has no space")
+        }
+    } else {
+        return placeable
+    }
+
+    return null
 }
 
 @Preview(name = "Default Tag container")
