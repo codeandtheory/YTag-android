@@ -6,7 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
@@ -34,9 +34,14 @@ fun TagViewContainer(
     tagViewContainerModifiers: TagViewContainerModifiers
 ) {
     //add overflow details tag into the list
-    val updatedTagViewData = tagViewData.toMutableList()
+    val overFlowText = remember {
+        mutableStateOf("")
+    }
+
     val moreTag = tagViewContainerModifiers.moreTagConfiguration
-    updatedTagViewData.add(moreTag)
+    val remainingTags: (Int) -> Unit = { count ->
+        overFlowText.value = moreTag.overFlowText.invoke(count)
+    }
 
     with(tagViewContainerModifiers) {
         val context = LocalContext.current
@@ -82,9 +87,10 @@ fun TagViewContainer(
             modifier = modifier
         ) {
             TagViewContainerLayout(
+                remainingTags = remainingTags,
                 tagViewContainerModifiers = tagViewContainerModifiers,
                 content = {
-                    updatedTagViewData.forEach {
+                    tagViewData.forEach {
                         with(it) {
                             val containerItemClick = {
                                 tagViewContainerModifiers.onClick.invoke(it)
@@ -100,6 +106,22 @@ fun TagViewContainer(
                             )
                         }
                     }
+
+                    //over flow item
+                    with(moreTag) {
+                        val containerItemClick = {
+                            tagViewContainerModifiers.onClick.invoke(this)
+                        }
+                        TagView(
+                            text = overFlowText.value,
+                            leadingIcon = leadingIcon,
+                            trailingIcon = trailingIcon,
+                            enabled = enabled,
+                            tagViewModifiers = tagViewModifiers,
+                            overFlowText = "",
+                            onClick = containerItemClick
+                        )
+                    }
                 })
         }
     }
@@ -108,10 +130,12 @@ fun TagViewContainer(
 /**
  * [TagViewContainerLayout] used for creating a custom layout to hosting y tag
  * @param tagViewContainerModifiers collection of modifier elements that decorate or add behavior to tag view container
- * @param content content of the container [Tag views]
+ * @param content content of the tag view container
+ * @param remainingTags return item count which are not rendered in the tag view container
  */
 @Composable
 fun TagViewContainerLayout(
+    remainingTags: (Int) -> Unit,
     tagViewContainerModifiers: TagViewContainerModifiers,
     content: @Composable () -> Unit
 ) {
@@ -174,7 +198,8 @@ fun TagViewContainerLayout(
                                 placeAbles,
                                 tagViewContainerModifiers,
                                 constraints,
-                                localDensity
+                                localDensity,
+                                remainingTags
                             )
                             overflow?.let {
                                 it.first.place(it.second)
@@ -190,7 +215,8 @@ fun TagViewContainerLayout(
                         placeAbles,
                         tagViewContainerModifiers,
                         constraints,
-                        localDensity
+                        localDensity,
+                        remainingTags
                     )
                     overflow?.let {
                         it.first.place(it.second)
@@ -209,13 +235,15 @@ fun TagViewContainerLayout(
  * @param tagViewContainerModifiers  collection of modifier elements that decorate or add behavior to tag view container
  * @param constraints immutable constraints for measuring layouts
  * @param localDensity A density of the screen. Used for the conversions between pixels and Dp
+ * @param remainingItems return item count which are not rendered in the tag view container
  */
 fun showOverFlow(
     index: Int,
     placeAbles: List<Pair<Placeable, IntOffset>>,
     tagViewContainerModifiers: TagViewContainerModifiers,
     constraints: Constraints,
-    localDensity: Density
+    localDensity: Density,
+    remainingItems: (Int) -> Unit
 ): Pair<Placeable, IntOffset>? {
     val offset = placeAbles[index].second
     val placeable = placeAbles[index]
@@ -238,12 +266,12 @@ fun showOverFlow(
 
                 if (moreTagXOffset + moreTagPlaceAble.first.width < constraints.maxWidth && moreTagYOffset + moreTagPlaceAble.first.height < constraints.maxHeight) {
                     val remainingTags = placeAbles.lastIndex - index
-                    tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
+                    remainingItems.invoke(remainingTags)
                     return Pair(moreTagPlaceAble.first, IntOffset(moreTagXOffset, moreTagYOffset))
                 }
             }
             val remainingTags = placeAbles.lastIndex - index
-            tagViewContainerModifiers.moreTagConfiguration.overFlowText.invoke(remainingTags)
+            remainingItems.invoke(remainingTags)
             return moreTagPlaceAble
         }
     } else {

@@ -357,13 +357,11 @@ fun DefaultTagViewContainer() {
         .tagSpacingHorizontal(8.dp)
         .backgroundColor(Color.Gray)
         .width(250.dp)
-        .height(250.dp)
+        .height(240.dp)
         .moreTagConfiguration(
             TagViewData(
-                text = "more",
-                overFlowText = { count ->
-                    Log.i("check_over_flow","remaining tags: $count")
-                    "$count more items"
+                overFlowText = {count ->
+                       "$count more"
                 },
                 tagViewModifiers = TagViewModifiers.Builder().backgroundColor(Color.Gray)
                     .width(100.dp)
