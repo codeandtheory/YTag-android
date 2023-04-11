@@ -84,7 +84,7 @@ data class TagViewModifiers(
     val semantics: String
 ) {
     class Builder {
-        private var minWidth: Dp = 52.dp
+        private var minWidth: Dp = 80.dp
         private var minHeight: Dp = 32.dp
         private var width: Dp? = null
         private var height: Dp = minHeight

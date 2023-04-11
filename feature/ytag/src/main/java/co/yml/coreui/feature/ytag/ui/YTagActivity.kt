@@ -70,8 +70,8 @@ class YTagActivity : ComponentActivity() {
                                 items(10) { item ->
                                     when (item) {
                                         0 -> CapsuleTag()
-//                                        1 -> RectangleTag()
-//                                        2 -> RoundRectangleTag()
+                                        1 -> RectangleTag()
+                                        2 -> RoundRectangleTag()
                                         3 -> DefaultTag()
                                         4 -> TagWithLeadingIcon()
                                         5 -> TagWithTrailingIcon()
@@ -105,7 +105,6 @@ fun DefaultTag() {
 @Composable
 fun CapsuleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .width(100.dp)
         .shape(CircleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -121,7 +120,7 @@ fun CapsuleTag() {
 @Composable
 fun RectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
-        .width(100.dp)
+        .width(90.dp)
         .shape(RectangleShape)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
@@ -138,7 +137,7 @@ fun RectangleTag() {
 fun RoundRectangleTag() {
     val tagViewModifiers = TagViewModifiers.Builder()
         .shape(RoundedCornerShape(dimensionResource(id = R.dimen.padding_small)))
-        .width(100.dp)
+        .width(120.dp)
         .backgroundColor(Color.Black)
         .textColor(Color.White)
         .style(textStyle)
@@ -154,7 +153,7 @@ fun RoundRectangleTag() {
 fun TagWithLeadingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .width(100.dp)
+        .width(120.dp)
         .maxLines(1)
         .overFlow(TextOverflow.Ellipsis)
         .shape(CircleShape)
@@ -185,7 +184,7 @@ fun TagWithLeadingIcon() {
 fun TagWithTrailingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .width(100.dp)
+        .width(150.dp)
         .maxLines(1)
         .textAlign(TextAlign.Start)
         .overFlow(TextOverflow.Ellipsis)
@@ -217,7 +216,7 @@ fun TagWithTrailingIcon() {
 fun TagWithLeadingTrailingIcon() {
     val context = LocalContext.current
     val tagViewModifiers = TagViewModifiers.Builder()
-        .width(100.dp)
+        .width(140.dp)
         .maxLines(1)
         .overFlow(TextOverflow.Ellipsis)
         .shape(CircleShape)
@@ -309,6 +308,9 @@ fun ShadowTag() {
 
 @Composable
 fun DefaultTagViewContainer() {
+    val context = LocalContext.current
+    val text = stringResource(id = co.yml.coreui.feature.ytag.R.string.tag_leading_icon)
+
     val tagViewModifiers = TagViewModifiers.Builder()
         .shape(CircleShape)
         .width(100.dp)
@@ -326,7 +328,7 @@ fun DefaultTagViewContainer() {
     val tagViewData = listOf(
         TagViewData("Tag view 1", tagViewModifiers),
         TagViewData("Tag  2", TagViewModifiers.Builder()
-            .width(100.dp)
+            .width(60.dp)
             .shape(CircleShape)
             .backgroundColor(Color.Black)
             .textColor(Color.White)
@@ -336,10 +338,42 @@ fun DefaultTagViewContainer() {
                 Log.i("check_click", "tag view clicked")
             }
             .build()),
-        TagViewData("Tag 3", tagViewModifiers),
+        TagViewData("Tag 3", TagViewModifiers.Builder()
+            .width(100.dp)
+            .textColor(Color.Black)
+            .enableBorder(true)
+            .borderColor(Color.Red)
+            .borderWidth(dimensionResource(id = R.dimen.padding_very_tiny))
+            .backgroundColor(Color.White)
+            .shape(CircleShape)
+            .style(textStyle)
+            .build()),
         TagViewData("Tag view 4", tagViewModifiers),
-        TagViewData("Tag view 5", tagViewModifiers),
-        TagViewData("Tag view 6", tagViewModifiers),
+        TagViewData("Tag 5", tagViewModifiers.copy(width = 60.dp)),
+        TagViewData(text = "Tag view 6", tagViewModifiers = TagViewModifiers.Builder()
+            .width(120.dp)
+            .maxLines(1)
+            .textAlign(TextAlign.Start)
+            .overFlow(TextOverflow.Ellipsis)
+            .shape(CircleShape)
+            .backgroundColor(Color.Black)
+            .textColor(Color.White)
+            .build()
+        ,leadingIcon = { enabled ->
+                IconButton(
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
+                    onClick = {
+                        if (enabled) {
+                            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+                        }
+                    }) {
+                    Icon(
+                        painter = painterResource(id = co.yml.coreui.feature.ytag.R.drawable.ic_location_24px),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+            }),
         TagViewData("Tag view 7", tagViewModifiers),
         TagViewData("Tag view 8", tagViewModifiers),
         TagViewData("Tag view 9", tagViewModifiers),
@@ -355,17 +389,18 @@ fun DefaultTagViewContainer() {
         .shape(RoundedCornerShape(4.dp))
         .tagSpacingVertical(8.dp)
         .tagSpacingHorizontal(8.dp)
-        .backgroundColor(Color.Gray)
+        .backgroundColor(colorResource(id = R.color.light_gray))
         .width(250.dp)
-        .height(240.dp)
+        .height(230.dp)
         .moreTagConfiguration(
             TagViewData(
                 overFlowText = {count ->
                        "$count more"
                 },
-                tagViewModifiers = TagViewModifiers.Builder().backgroundColor(Color.Gray)
+                tagViewModifiers = TagViewModifiers.Builder().backgroundColor(colorResource(id = R.color.light_gray))
                     .width(100.dp)
-                    .textColor(Color.White)
+                    .textColor(Color.Black)
+                    .textAlign(TextAlign.Start)
                     .onCLick { Log.i("check_click", "more tag clicked") }.build()
             )
         )
