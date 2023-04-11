@@ -179,49 +179,69 @@ fun TagViewContainerLayout(
             height = constraints.maxHeight
         ) {
             placeAbles.forEachIndexed { index, tagPlaceable ->
-                val (placeable, offset) = tagPlaceable
-                //check whether container  has enough space to place the current tag
-                if (offset.x + placeable.width < constraints.maxWidth && offset.y + placeable.height < constraints.maxHeight) {
-                    //space available for current tag
-                    val nextItemIndex = index + 1
-                    //check whether container  has enough space to place the next tag
-                    if (nextItemIndex <= placeAbles.lastIndex) {
-                        val nextItemOffset = placeAbles[nextItemIndex].second
-                        if (nextItemOffset.x + placeAbles[nextItemIndex].first.width < constraints.maxWidth && nextItemOffset.y + placeAbles[nextItemIndex].first.height < constraints.maxHeight) {
-                            //space available for next tag
-                            placeable.place(offset.x, offset.y)
-                        } else {
-                            //space not available for next tag
-                            //place the over flow tag
-                            val overflow = showOverFlow(
-                                index,
-                                placeAbles,
-                                tagViewContainerModifiers,
-                                constraints,
-                                localDensity,
-                                remainingTags
-                            )
-                            overflow?.let {
-                                it.first.place(it.second)
+                if (index != placeAbles.lastIndex) {
+                    val (placeable, offset) = tagPlaceable
+                    //check whether container  has enough space to place the current tag
+                    if (offset.x + placeable.width < constraints.maxWidth && offset.y + placeable.height < constraints.maxHeight) {
+                        //space available for current tag
+                        val nextItemIndex = index + 1
+                        //check whether container  has enough space to place the next tag
+                        if (nextItemIndex <= placeAbles.lastIndex) {
+                            val nextItemOffset = placeAbles[nextItemIndex].second
+                            if (nextItemOffset.x + placeAbles[nextItemIndex].first.width < constraints.maxWidth && nextItemOffset.y + placeAbles[nextItemIndex].first.height < constraints.maxHeight) {
+                                //space available for next tag
+                                placeable.place(offset.x, offset.y)
+                            } else {
+                                //space not available for next tag
+                                //place the over flow tag
+                                //check whether to accommodate current tag and more
+                                val moreTagPlaceAble = placeAbles.last()
+                                val moreXOffset =
+                                    offset.x + placeable.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
+                                        .toInt()
+                                val moreYOffset = offset.y
+                                if (moreXOffset + moreTagPlaceAble.first.width < constraints.maxWidth &&
+                                    moreYOffset + moreTagPlaceAble.first.height < constraints.maxHeight
+                                ) {
+                                    //place current tag
+                                    placeable.place(offset.x, offset.y)
+                                    //place more tag
+                                    val remainingItems = placeAbles.lastIndex - 1 - index
+                                    remainingTags.invoke(remainingItems)
+                                    moreTagPlaceAble.first.place(moreXOffset, moreYOffset)
+                                    return@layout
+                                } else {
+                                    val overflow = showOverFlow(
+                                        index,
+                                        placeAbles,
+                                        tagViewContainerModifiers,
+                                        constraints,
+                                        localDensity,
+                                        remainingTags
+                                    )
+                                    overflow?.let {
+                                        it.first.place(it.second)
+                                    }
+                                    return@layout
+                                }
                             }
-                            return@layout
                         }
+                    } else {
+                        //space not available for current tag
+                        //place the over flow tag
+                        val overflow = showOverFlow(
+                            index,
+                            placeAbles,
+                            tagViewContainerModifiers,
+                            constraints,
+                            localDensity,
+                            remainingTags
+                        )
+                        overflow?.let {
+                            it.first.place(it.second)
+                        }
+                        return@layout
                     }
-                } else {
-                    //space available for current tag
-                    //place the over flow tag
-                    val overflow = showOverFlow(
-                        index,
-                        placeAbles,
-                        tagViewContainerModifiers,
-                        constraints,
-                        localDensity,
-                        remainingTags
-                    )
-                    overflow?.let {
-                        it.first.place(it.second)
-                    }
-                    return@layout
                 }
             }
         }
@@ -247,10 +267,8 @@ fun showOverFlow(
 ): Pair<Placeable, IntOffset>? {
     val offset = placeAbles[index].second
     val placeable = placeAbles[index]
-
     if (tagViewContainerModifiers.moreTagConfiguration.showOverFlow) {
         val moreTagPlaceAble = placeAbles.last()
-
         if (offset.x + moreTagPlaceAble.first.width < constraints.maxWidth && offset.y + moreTagPlaceAble.first.height < constraints.maxHeight) {
             //place more tag
             //check whether space available for over flow tag to place in between current [which replace over flow tag] and previous tags
@@ -272,7 +290,7 @@ fun showOverFlow(
             }
             val remainingTags = placeAbles.lastIndex - index
             remainingItems.invoke(remainingTags)
-            return moreTagPlaceAble
+            return Pair(moreTagPlaceAble.first, IntOffset(offset.x, offset.y))
         }
     } else {
         return placeable

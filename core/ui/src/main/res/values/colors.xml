@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="light_gray">#E0E0E0</color>
+    <color name="russian_violet">#0C0A3E</color>
+    <color name="light_green">#C8FFBE</color>
+    <color name="light_yellow">#EDFFAB</color>
+    <color name="bitter_sweet">#F9564F</color>
+    <color name="power">#89608E</color>
+    <color name="cyan_50">#E1F5FE</color>
+    <color name="cyan_900">#01579B</color>
+    <color name="cyan_700">#0288D1</color>
+
 </resources>
