@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">CoreUICatalogApp</string>
     <string name="title_y_tag">Tags</string>
+    <string name="more">more</string>
+    <string name="tag_view_container_accessibility_title">Tag view container</string>
 </resources>

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 
 /**
- * Immutable collection of modifier elements that decorate or add behavior to TagView elements.
+ * [TagViewModifiers] Represents immutable collection of modifier elements that decorate or add behavior to TagView elements.
  * - If a parameter is explicitly set here then that parameter will always be used.
  * - If a parameter is not set then the corresponding default value will be used
  *
@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
  * @param shadowElevation  The size of the shadow below the surface.
  * @param containerPaddingValues define padding for TagView
  * @param onClick perform click event
+ * @param semantics add content description for tag view
  */
 data class TagViewModifiers(
     val minWidth: Dp,
@@ -79,10 +80,11 @@ data class TagViewModifiers(
     val tonalElevation: Dp,
     val shadowElevation: Dp,
     val containerPaddingValues: PaddingValues,
-    val onClick: () -> Unit
+    val onClick: () -> Unit,
+    val semantics: String
 ) {
     class Builder {
-        private var minWidth: Dp = 52.dp
+        private var minWidth: Dp = 80.dp
         private var minHeight: Dp = 32.dp
         private var width: Dp? = null
         private var height: Dp = minHeight
@@ -111,6 +113,7 @@ data class TagViewModifiers(
         private var shadowElevation: Dp = 0.dp
         private var containerPaddingValues: PaddingValues = PaddingValues(horizontal = 4.dp)
         private var onClick: () -> Unit = {}
+        private var semantics: String = text
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -166,6 +169,8 @@ data class TagViewModifiers(
             apply { this.containerPaddingValues = paddingValues }
 
         fun onCLick(onClick: () -> Unit) = apply { this.onClick = onClick }
+
+        fun semantics(semantics: String) = apply { this.semantics = semantics }
         fun build() = TagViewModifiers(
             minWidth,
             minHeight,
@@ -194,7 +199,8 @@ data class TagViewModifiers(
             tonalElevation,
             shadowElevation,
             containerPaddingValues,
-            onClick
+            onClick,
+            semantics
         )
     }
 }
