@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.sp
 data class TagViewModifiers(
     val minWidth: Dp,
     val minHeight: Dp,
-    val width: Dp?,
+    val width: Dp,
     val height: Dp,
     val textColor: Color,
     val fontSize: TextUnit,
@@ -80,13 +80,15 @@ data class TagViewModifiers(
     val tonalElevation: Dp,
     val shadowElevation: Dp,
     val containerPaddingValues: PaddingValues,
-    val onClick: () -> Unit,
-    val semantics: String
+    val onClick: (TagViewData) -> Unit,
+    val semantics: String,
+    val alphaAnimation: AlphaAnimation
+
 ) {
     class Builder {
         private var minWidth: Dp = 80.dp
         private var minHeight: Dp = 32.dp
-        private var width: Dp? = null
+        private var width: Dp = minWidth
         private var height: Dp = minHeight
         private var text: String = ""
         private var textColor: Color = Color.Black
@@ -112,8 +114,10 @@ data class TagViewModifiers(
         private var tonalElevation: Dp = 0.dp
         private var shadowElevation: Dp = 0.dp
         private var containerPaddingValues: PaddingValues = PaddingValues(horizontal = 4.dp)
-        private var onClick: () -> Unit = {}
+        private var onClick: (TagViewData) -> Unit = {}
         private var semantics: String = text
+        private var alphaAnimation: AlphaAnimation = AlphaAnimation()
+
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -168,9 +172,11 @@ data class TagViewModifiers(
         fun containerPaddingValues(paddingValues: PaddingValues) =
             apply { this.containerPaddingValues = paddingValues }
 
-        fun onCLick(onClick: () -> Unit) = apply { this.onClick = onClick }
+        fun onCLick(onClick: (TagViewData) -> Unit) = apply { this.onClick = onClick }
 
         fun semantics(semantics: String) = apply { this.semantics = semantics }
+
+        fun alphaAnimation(alphaAnimation: AlphaAnimation) = apply { this.alphaAnimation = alphaAnimation }
         fun build() = TagViewModifiers(
             minWidth,
             minHeight,
@@ -200,7 +206,8 @@ data class TagViewModifiers(
             shadowElevation,
             containerPaddingValues,
             onClick,
-            semantics
+            semantics,
+            alphaAnimation
         )
     }
 }
