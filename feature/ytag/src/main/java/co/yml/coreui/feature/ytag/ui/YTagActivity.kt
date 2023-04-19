@@ -138,11 +138,9 @@ fun DefaultTagViewContainer(tagViewData: MutableList<TagViewData>) {
         TagViewContainerModifiers.Builder().containerPaddingValues(PaddingValues(8.dp))
             .enableBorder(true).shape(RoundedCornerShape(4.dp)).tagSpacingVertical(8.dp)
             .tagSpacingHorizontal(8.dp).backgroundColor(colorResource(id = R.color.cyan_50))
-            .width(360.dp).height(90.dp).moreTagConfiguration(
+            .width(360.dp).height(50.dp).moreTagConfiguration(
                 TagViewData(
                     overFlowText = { count ->
-                        Log.i("check_tag_click", "tag overflow count: $count")
-
                         "+ $count more"
                     },
                     tagViewModifiers = TagViewModifiers.Builder()
@@ -266,8 +264,6 @@ fun CustomTagViewContainer(tagViewData: MutableList<TagViewData>) {
             .moreTagConfiguration(
                 TagViewData(
                     overFlowText = { count ->
-                        Log.i("check_tag_click", "tag overflow count: $count")
-
                         "+ $count more"
                     },
                     tagViewModifiers = TagViewModifiers.Builder()
