@@ -24,7 +24,8 @@ fun CoreUIComponents(title: String, onClick: () -> Unit) {
                     )
                 )
                 .fillMaxWidth()
-                .height(48.dp), onClick = onClick,
+                .height(48.dp),
+            onClick = onClick,
             colors = ButtonDefaults.buttonColors(containerColor = CoreUICatalogTheme.colors.button)
         ) {
             Text(

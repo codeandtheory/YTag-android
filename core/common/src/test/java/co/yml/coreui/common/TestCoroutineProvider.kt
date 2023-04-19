@@ -1,10 +1,10 @@
 package co.yml.coreui.common
 
+import co.yml.coreui.core.common.di.DispatcherModule
+import co.yml.coreui.core.common.di.DispatcherModule_ProvideNetworkDispatcherFactory.provideNetworkDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import co.yml.coreui.core.common.di.DispatcherModule
-import co.yml.coreui.core.common.di.DispatcherModule_ProvideNetworkDispatcherFactory.provideNetworkDispatcher
 
 /**
  * Test coroutine provider

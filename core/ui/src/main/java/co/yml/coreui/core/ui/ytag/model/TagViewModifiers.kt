@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 /**
  * [TagViewModifiers] Represents immutable collection of modifier elements that decorate or add behavior to TagView elements.
  * - If a parameter is explicitly set here then that parameter will always be used.
@@ -117,7 +116,6 @@ data class TagViewModifiers(
         private var onClick: (TagViewData) -> Unit = {}
         private var semantics: String = text
         private var alphaAnimation: AlphaAnimation = AlphaAnimation()
-
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 

@@ -1,13 +1,6 @@
 package co.yml.coreui.core.ui.ytag.model
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 
 /**
  * [TagViewData] Used for holding the TagView data
@@ -27,6 +20,7 @@ data class TagViewData(
     val trailingIcon: @Composable ((tagViewData: TagViewData) -> Unit)? = null,
     val enabled: Boolean = true,
     val showOverFlow: Boolean = true,
-    val overFlowText: (Int) -> String =  { _ -> "" })
+    val overFlowText: (Int) -> String = { _ -> "" }
+)
 
 data class AlphaAnimation(var enabled: Boolean = true, val durationMillis: Int = 650)

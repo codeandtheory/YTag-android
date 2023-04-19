@@ -32,4 +32,3 @@ dependencies {
     androidTestImplementation(versionCatalogLibs.androidx.compose.ui.test)
     androidTestImplementation(project(mapOf("path" to ":core:test")))
 }
-

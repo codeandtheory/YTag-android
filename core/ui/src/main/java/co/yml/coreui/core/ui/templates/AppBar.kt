@@ -38,7 +38,6 @@ fun AppBar() {
     }
 }
 
-
 /**
  * Top app bars display information and actions at the top of a screen.
  *
@@ -77,30 +76,31 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     CoreUICatalogTheme {
-        Scaffold(modifier = Modifier.fillMaxSize(),
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
             containerColor = CoreUICatalogTheme.colors.background,
             topBar = { AppBar() },
-            content = { Box(Modifier.padding(it)) {} })
+            content = { Box(Modifier.padding(it)) {} }
+        )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun AppBarWithBackButton() {
     CoreUICatalogTheme {
-        Scaffold(modifier = Modifier.fillMaxSize(),
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
             containerColor = CoreUICatalogTheme.colors.background,
             topBar = {
                 AppBarWithBackButton(title = stringResource(id = R.string.title_y_tag)) {
                 }
             },
-            content = { Box(Modifier.padding(it)) {} })
-
+            content = { Box(Modifier.padding(it)) {} }
+        )
     }
 }

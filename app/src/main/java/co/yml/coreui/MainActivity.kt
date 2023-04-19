@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import co.yml.coreui.feature.ytag.ui.YTagActivity
 import co.yml.coreui.core.ui.templates.AppBar
 import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
+import co.yml.coreui.feature.ytag.ui.YTagActivity
 import co.yml.coreui.ui.R
 import co.yml.coreui.ui.presentation.CoreUIComponents
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,10 +30,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CoreUICatalogTheme {
-                Scaffold(modifier = Modifier.fillMaxSize(),
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
                     containerColor = CoreUICatalogTheme.colors.background,
-                    topBar = { AppBar() })
-                {
+                    topBar = { AppBar() }
+                ) {
                     Column(
                         modifier = Modifier
                             .padding(it)

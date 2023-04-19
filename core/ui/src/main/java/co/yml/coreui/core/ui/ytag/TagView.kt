@@ -2,7 +2,6 @@ package co.yml.coreui.core.ui.ytag
 
 import android.R
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
@@ -27,7 +26,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -60,16 +58,17 @@ fun TagView(
         trailingIcon = trailingIcon,
         enabled = enabled,
         tagViewModifiers = tagViewModifiers,
-        overFlowText = { overFlowText })
+        overFlowText = { overFlowText }
+    )
 
-    //used for visibility animation
+    // used for visibility animation
     val state = remember {
         MutableTransitionState(false).apply {
             targetState = true
         }
     }
 
-    //used for alpha animation
+    // used for alpha animation
     var tagVisible by remember {
         mutableStateOf(true)
     }
@@ -78,10 +77,10 @@ fun TagView(
         targetValue = if (tagVisible) 1f else 0f,
         animationSpec = tween(
             durationMillis = tagViewModifiers.alphaAnimation.durationMillis,
-            easing = LinearEasing,
+            easing = LinearEasing
         ),
         finishedListener = {
-            //execute once remove animation is performed
+            // delegate the click event once remove animation is completed
             tagViewModifiers.onClick.invoke(tagViewData)
         }
     )
@@ -104,7 +103,6 @@ fun TagView(
             ) {
                 ConstraintLayout(
                     modifier = Modifier
-
                         .width(width = width)
                         .height(height)
                         .run {
@@ -120,10 +118,10 @@ fun TagView(
                         }
                         .clickable {
                             if (enabled) {
-                                if (tagViewModifiers.alphaAnimation.enabled){
+                                if (tagViewModifiers.alphaAnimation.enabled) {
                                     tagVisible = false
                                     state.targetState = false
-                                }else{
+                                } else {
                                     tagViewModifiers.onClick.invoke(tagViewData)
                                 }
                             }
@@ -135,16 +133,16 @@ fun TagView(
                             shape = shape
                         )
 
-
                 ) {
                     val (leading_icon, text_view, trailing_icon) = createRefs()
 
-                    Box(modifier = Modifier
-                        .constrainAs(leading_icon) {
-                            start.linkTo(parent.start)
-                            top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
-                        }
+                    Box(
+                        modifier = Modifier
+                            .constrainAs(leading_icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                                bottom.linkTo(parent.bottom)
+                            }
                     ) {
                         leadingIcon?.invoke(tagViewData)
                     }
@@ -180,11 +178,12 @@ fun TagView(
                         maxLines = maxLines,
                         onTextLayout = onTextLayout
                     )
-                    Box(modifier = Modifier.constrainAs(trailing_icon) {
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                    }
+                    Box(
+                        modifier = Modifier.constrainAs(trailing_icon) {
+                            end.linkTo(parent.end)
+                            top.linkTo(parent.top)
+                            bottom.linkTo(parent.bottom)
+                        }
                     ) {
                         trailingIcon?.invoke(tagViewData)
                     }
@@ -324,13 +323,13 @@ fun LeadingTrailingIconTag() {
             )
         }
     }, trailingIcon = {
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_menu_close_clear_cancel),
-                contentDescription = null
-            )
-        }
-    }, tagViewModifiers = tagViewModifiers)
+            IconButton(onClick = {}) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_menu_close_clear_cancel),
+                    contentDescription = null
+                )
+            }
+        }, tagViewModifiers = tagViewModifiers)
 }
 
 @Preview(name = "Tag with min width and height")

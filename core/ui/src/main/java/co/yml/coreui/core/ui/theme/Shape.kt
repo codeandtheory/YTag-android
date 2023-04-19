@@ -10,4 +10,4 @@ data class CoreUICatalogShapes(
     val large: RoundedCornerShape = RoundedCornerShape(0.dp)
 )
 
-internal val LocalShapes = staticCompositionLocalOf {CoreUICatalogShapes() }
+internal val LocalShapes = staticCompositionLocalOf { CoreUICatalogShapes() }

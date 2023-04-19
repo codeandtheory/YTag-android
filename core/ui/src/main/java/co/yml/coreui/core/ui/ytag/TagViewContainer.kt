@@ -1,6 +1,5 @@
 package co.yml.coreui.core.ui.ytag
 
-import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -40,7 +39,7 @@ fun TagViewContainer(
     tagViewData: List<TagViewData>,
     tagViewContainerModifiers: TagViewContainerModifiers
 ) {
-    //add overflow details tag into the list
+    // add overflow details tag into the list
     val overFlowText = remember {
         mutableStateOf("")
     }
@@ -65,35 +64,36 @@ fun TagViewContainer(
                 modifier.then(Modifier.wrapContentHeight())
             }
 
-            modifier = modifier.then(Modifier
-                .run {
-                    if (enableBorder) {
-                        border(
-                            width = borderWidth,
-                            color = borderColor,
-                            shape = shape
-                        )
-                    } else {
-                        background(color = backgroundColor, shape = shape)
+            modifier = modifier.then(
+                Modifier
+                    .run {
+                        if (enableBorder) {
+                            border(
+                                width = borderWidth,
+                                color = borderColor,
+                                shape = shape
+                            )
+                        } else {
+                            background(color = backgroundColor, shape = shape)
+                        }
                     }
-                }
-                .clickable { }
-                .semantics {
-                    this.contentDescription =
-                        tagViewContainerModifiers.semantics.ifEmpty { context.getString(co.yml.coreui.ui.R.string.tag_view_container_accessibility_title) }
-                }
-                .testTag("tag_view_container")
-                .background(
-                    color = backgroundColor,
-                    shape = shape
-                )
-                .padding(containerPaddingValues)
-                .animateContentSize(
-                    animationSpec = tween(
-                        durationMillis = 360,
-                        easing = LinearEasing
+                    .clickable { }
+                    .semantics {
+                        this.contentDescription =
+                            tagViewContainerModifiers.semantics.ifEmpty { context.getString(co.yml.coreui.ui.R.string.tag_view_container_accessibility_title) }
+                    }
+                    .testTag("tag_view_container")
+                    .background(
+                        color = backgroundColor,
+                        shape = shape
                     )
-                )
+                    .padding(containerPaddingValues)
+                    .animateContentSize(
+                        animationSpec = tween(
+                            durationMillis = 360,
+                            easing = LinearEasing
+                        )
+                    )
             )
 
             Box(
@@ -122,7 +122,7 @@ fun TagViewContainer(
                             }
                         }
 
-                        //over flow item
+                        // over flow item
                         with(moreTag) {
                             val tagViewModifiers = tagViewModifiers.copy(onClick = {
                                 tagViewContainerModifiers.onClick.invoke(moreTag)
@@ -136,7 +136,8 @@ fun TagViewContainer(
                                 overFlowText = ""
                             )
                         }
-                    })
+                    }
+                )
             }
         }
     }
@@ -161,13 +162,13 @@ fun TagViewContainerLayout(
         var currentOffset = IntOffset.Zero
         val itemWidths = mutableListOf<IntOffset>()
 
-        //Measurement phase
+        // Measurement phase
         val placeAbles = measurables.map { measurable ->
             val placeAble: Placeable = measurable.measure(constraints)
 
-            //calculate the offsets to place the tags in layout phase
+            // calculate the offsets to place the tags in layout phase
             if (currentOffset.x > 0f && currentOffset.x + placeAble.width + tagViewContainerModifiers.tagSpacingHorizontal.toPx()
-                    .toInt() > constraints.maxWidth
+                .toInt() > constraints.maxWidth
             ) {
                 currentRow += 1
                 currentOffset =
@@ -232,20 +233,20 @@ fun calculateTagPlacementOffset(
     placeAbles.forEachIndexed { index, tagPlaceable ->
         if (index != placeAbles.lastIndex) {
             val (placeable, offset) = tagPlaceable
-            //check whether container  has enough space to place the current tag
+            // check whether container  has enough space to place the current tag
             if (offset.x + placeable.width < constraints.maxWidth && offset.y + placeable.height < constraints.maxHeight) {
-                //space available for current tag
+                // space available for current tag
                 val nextItemIndex = index + 1
-                //check whether container  has enough space to place the next tag
+                // check whether container  has enough space to place the next tag
                 if (nextItemIndex <= placeAbles.lastIndex) {
                     val nextItemOffset = placeAbles[nextItemIndex].second
                     if (nextItemOffset.x + placeAbles[nextItemIndex].first.width < constraints.maxWidth && nextItemOffset.y + placeAbles[nextItemIndex].first.height < constraints.maxHeight) {
-                        //space available for next tag
+                        // space available for next tag
                         calculatedPlaceable.add(Pair(placeable, offset))
                     } else {
-                        //space not available for next tag
-                        //place the over flow tag
-                        //check whether to accommodate current tag and more
+                        // space not available for next tag
+                        // place the over flow tag
+                        // check whether to accommodate current tag and more
                         val moreTagPlaceAble = placeAbles.last()
                         val moreXOffset =
                             offset.x + placeable.width + localDensity.run { tagViewContainerModifiers.tagSpacingHorizontal.toPx() }
@@ -254,9 +255,9 @@ fun calculateTagPlacementOffset(
                         if (moreXOffset + moreTagPlaceAble.first.width < constraints.maxWidth &&
                             moreYOffset + moreTagPlaceAble.first.height < constraints.maxHeight
                         ) {
-                            //place current tag
+                            // place current tag
                             calculatedPlaceable.add(Pair(placeable, offset))
-                            //place more tag
+                            // place more tag
                             val remainingItems = placeAbles.lastIndex - 1 - index
                             remainingTags.invoke(remainingItems)
                             calculatedPlaceable.add(
@@ -281,8 +282,8 @@ fun calculateTagPlacementOffset(
                     }
                 }
             } else {
-                //space not available for current tag
-                //place the over flow tag
+                // space not available for current tag
+                // place the over flow tag
                 val overflow = calculateOverFlowPlacement(
                     index,
                     placeAbles,
@@ -323,8 +324,8 @@ fun calculateOverFlowPlacement(
     if (tagViewContainerModifiers.moreTagConfiguration.showOverFlow) {
         val moreTagPlaceAble = placeAbles.last()
         if (offset.x + moreTagPlaceAble.first.width < constraints.maxWidth && offset.y + moreTagPlaceAble.first.height < constraints.maxHeight) {
-            //place more tag
-            //check whether space available for over flow tag to place in between current [which replace over flow tag] and previous tags
+            // place more tag
+            // check whether space available for over flow tag to place in between current [which replace over flow tag] and previous tags
             val previousIndex = index - 1
             if (previousIndex >= 0) {
                 val previousOffset = placeAbles[previousIndex].second
