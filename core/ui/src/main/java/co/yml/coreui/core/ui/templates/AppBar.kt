@@ -44,6 +44,7 @@ fun AppBar() {
  * @param title title of the screen
  * @param onBackPressed implementation of back press event
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
     Surface(shadowElevation = dimensionResource(id = R.dimen.padding_small)) {
@@ -68,7 +69,7 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back_arrow),
                         contentDescription = "Back",
-                        tint = Color.Black
+                        tint = CoreUICatalogTheme.colors.primary
                     )
                 }
             }
