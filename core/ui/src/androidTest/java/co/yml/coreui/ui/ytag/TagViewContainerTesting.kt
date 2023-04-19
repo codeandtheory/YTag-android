@@ -82,14 +82,14 @@ class TagViewContainerTesting {
     }
 
     @Test
-    fun tagViewContainer_tags_shown(){
+    fun tagViewContainer_tags_shown() {
         launchTagViewContainer()
 
         composeTestRule.onNodeWithText("Tag 1").assertIsDisplayed()
     }
 
     @Test
-    fun tagViewContainer_with_less_space_more_tag_shown(){
+    fun tagViewContainer_with_less_space_more_tag_shown() {
         val tagViewContainerModifiers = TagViewContainerModifiers.Builder()
             .width(150.dp)
             .height(50.dp)

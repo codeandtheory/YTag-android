@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-//todo sree_ is min width and min height required?
 /**
  * [TagViewContainerModifiers] Immutable collection of modifier elements that decorate or add behavior to TagView container.
  * @param minWidth define a default min width of TagViewContainer
@@ -40,14 +39,14 @@ data class TagViewContainerModifiers(
     val tagSpacingVertical: Dp,
     val moreTagConfiguration: TagViewData,
     val onClick: (TagViewData) -> Unit,
-    val semantics: String
+    val semantics: String,
+    val alphaAnimation: AlphaAnimation
 ) {
-    //todo sree_ check min and max default size
     class Builder {
         private var minWidth: Dp = 150.dp
         private var minHeight: Dp = 150.dp
         private var width: Dp = Dp.Unspecified
-        private var height: Dp =  Dp.Unspecified
+        private var height: Dp = Dp.Unspecified
         private var enableBorder: Boolean = false
         private var borderWidth: Dp = 1.dp
         private var borderColor: Color = Color.Black
@@ -67,6 +66,7 @@ data class TagViewContainerModifiers(
         )
         private var onClick: (TagViewData) -> Unit = {}
         private var semantics: String = ""
+        private var alphaAnimation: AlphaAnimation = AlphaAnimation()
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
@@ -101,6 +101,8 @@ data class TagViewContainerModifiers(
 
         fun semantics(semantics: String) = apply { this.semantics = semantics }
 
+        fun alphaAnimation(alphaAnimation: AlphaAnimation) = apply { this.alphaAnimation = alphaAnimation }
+
         fun build() = TagViewContainerModifiers(
             minWidth,
             minHeight,
@@ -116,7 +118,8 @@ data class TagViewContainerModifiers(
             tagSpacingVertical,
             moreTagConfiguration,
             onClick,
-            semantics
+            semantics,
+            alphaAnimation
         )
     }
 }

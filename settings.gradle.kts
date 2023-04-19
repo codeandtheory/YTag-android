@@ -30,4 +30,3 @@ include(":core:data")
 include(":core:test")
 include("feature:ytag")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-

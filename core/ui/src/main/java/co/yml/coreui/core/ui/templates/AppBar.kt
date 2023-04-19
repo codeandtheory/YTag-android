@@ -38,13 +38,13 @@ fun AppBar() {
     }
 }
 
-
 /**
  * Top app bars display information and actions at the top of a screen.
  *
  * @param title title of the screen
  * @param onBackPressed implementation of back press event
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
     Surface(shadowElevation = dimensionResource(id = R.dimen.padding_small)) {
@@ -69,7 +69,7 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back_arrow),
                         contentDescription = "Back",
-                        tint = Color.Black
+                        tint = CoreUICatalogTheme.colors.primary
                     )
                 }
             }
@@ -77,30 +77,31 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     CoreUICatalogTheme {
-        Scaffold(modifier = Modifier.fillMaxSize(),
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
             containerColor = CoreUICatalogTheme.colors.background,
             topBar = { AppBar() },
-            content = { Box(Modifier.padding(it)) {} })
+            content = { Box(Modifier.padding(it)) {} }
+        )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun AppBarWithBackButton() {
     CoreUICatalogTheme {
-        Scaffold(modifier = Modifier.fillMaxSize(),
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
             containerColor = CoreUICatalogTheme.colors.background,
             topBar = {
                 AppBarWithBackButton(title = stringResource(id = R.string.title_y_tag)) {
                 }
             },
-            content = { Box(Modifier.padding(it)) {} })
-
+            content = { Box(Modifier.padding(it)) {} }
+        )
     }
 }

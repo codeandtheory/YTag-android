@@ -16,9 +16,11 @@ import androidx.compose.runtime.Composable
 data class TagViewData(
     val text: String = "",
     val tagViewModifiers: TagViewModifiers = TagViewModifiers.Builder().build(),
-    val leadingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
-    val trailingIcon: @Composable ((enable: Boolean) -> Unit)? = null,
+    val leadingIcon: @Composable ((tagViewData: TagViewData) -> Unit)? = null,
+    val trailingIcon: @Composable ((tagViewData: TagViewData) -> Unit)? = null,
     val enabled: Boolean = true,
     val showOverFlow: Boolean = true,
-    val overFlowText: (Int) -> String =  { _ -> "" }
+    val overFlowText: (Int) -> String = { _ -> "" }
 )
+
+data class AlphaAnimation(var enabled: Boolean = true, val durationMillis: Int = 650)

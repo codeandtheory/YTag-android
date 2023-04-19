@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
 import co.yml.coreui.core.ui.ytag.TagView
+import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
 import org.junit.Rule
 import org.junit.Test
 
@@ -50,7 +50,6 @@ class TagViewTest {
 
     @Test
     fun tagView_shown() {
-
         launchYTag(text = "YTag")
         composeTestRule.onNodeWithTag("tag_view", useUnmergedTree = true).printToString()
 
@@ -94,7 +93,6 @@ class TagViewTest {
 
     @Test
     fun tagView_leading_and_trailing_icon_shown() {
-
         launchYTag(text = "YTag", leadingIcon = {
             IconButton(onClick = {}, modifier = Modifier.testTag("leading_icon")) {
                 Icon(
@@ -103,20 +101,20 @@ class TagViewTest {
                 )
             }
         }, trailingIcon = {
-            IconButton(onClick = {}, modifier = Modifier.testTag("trailing_icon")) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_menu_mylocation),
-                    contentDescription = null
-                )
-            }
-        })
+                IconButton(onClick = {}, modifier = Modifier.testTag("trailing_icon")) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_menu_mylocation),
+                        contentDescription = null
+                    )
+                }
+            })
 
         composeTestRule.onNodeWithTag("leading_icon", useUnmergedTree = true).assertIsDisplayed()
         composeTestRule.onNodeWithTag("trailing_icon", useUnmergedTree = true).assertIsDisplayed()
     }
 
     @Test
-    fun tag_with_modifiers_are_executed(){
+    fun tag_with_modifiers_are_executed() {
         val tagViewModifiers = TagViewModifiers.Builder()
             .minWidth(32.dp)
             .minHeight(100.dp)
@@ -134,7 +132,7 @@ class TagViewTest {
             .overFlow(TextOverflow.Ellipsis)
             .softWrap(true)
             .maxLines(1)
-            .onTextLayout {  }
+            .onTextLayout { }
             .style(TextStyle())
             .enableBorder(true)
             .borderColor(Color.Red)
@@ -145,7 +143,7 @@ class TagViewTest {
             .tonalElevation(2.dp)
             .shadowElevation(2.dp)
             .containerPaddingValues(PaddingValues(4.dp))
-            .onCLick {  }
+            .onCLick { }
             .borderWidth(1.dp)
             .build()
 
