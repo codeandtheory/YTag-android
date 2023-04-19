@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-// todo sree_ is min width and min height required?
 /**
  * [TagViewContainerModifiers] Immutable collection of modifier elements that decorate or add behavior to TagView container.
  * @param minWidth define a default min width of TagViewContainer
@@ -43,7 +42,6 @@ data class TagViewContainerModifiers(
     val semantics: String,
     val alphaAnimation: AlphaAnimation
 ) {
-    // todo sree_ check min and max default size
     class Builder {
         private var minWidth: Dp = 150.dp
         private var minHeight: Dp = 150.dp
