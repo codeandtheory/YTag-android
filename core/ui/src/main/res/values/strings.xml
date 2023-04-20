@@ -4,4 +4,5 @@
     <string name="title_y_tag">Tags</string>
     <string name="more">more</string>
     <string name="tag_view_container_accessibility_title">Tag view container</string>
+    <string name="title_y_stepper">Stepper</string>
 </resources>

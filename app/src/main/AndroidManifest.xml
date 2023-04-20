@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.ytag.ui.YTagActivity"/>
+        <activity android:name=".feature.ytag.ui.YStepperActivity"/>
     </application>
 
 </manifest>
