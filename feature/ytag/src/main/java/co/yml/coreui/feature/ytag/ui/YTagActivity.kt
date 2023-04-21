@@ -52,11 +52,14 @@ class YTagActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     containerColor = CoreUICatalogTheme.colors.background,
                     topBar = {
-                        AppBarWithBackButton(stringResource(id = R.string.title_y_tag),
+                        AppBarWithBackButton(
+                            stringResource(id = R.string.title_y_tag),
                             onBackPressed = {
                                 onBackPressed()
-                            })
-                    }) {
+                            }
+                        )
+                    }
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -77,9 +80,9 @@ class YTagActivity : ComponentActivity() {
 }
 
 val textStyle = TextStyle(
-    fontSize = 14.sp, fontFamily = FontFamily.SansSerif
+    fontSize = 14.sp,
+    fontFamily = FontFamily.SansSerif
 )
-
 
 @Composable
 fun DefaultTagViewContainer() {
@@ -88,46 +91,48 @@ fun DefaultTagViewContainer() {
         mutableStateListOf<TagViewData>()
     }
     tagViewData.addAll(
-        (listOf(
-            capsuleTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_300),
-                textColor = Color.Black
-            ),
+        (
+            listOf(
+                capsuleTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_300),
+                    textColor = Color.Black
+                ),
 
-            rectangleTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_200),
-                textColor = Color.Black
-            ),
+                rectangleTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_200),
+                    textColor = Color.Black
+                ),
 
-            roundRectTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_300),
-                textColor = Color.Black
-            ),
+                roundRectTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_300),
+                    textColor = Color.Black
+                ),
 
-            leadingIconTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_200),
-                textColor = Color.Black,
-                iconTint = Color.Black
-            ),
+                leadingIconTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_200),
+                    textColor = Color.Black,
+                    iconTint = Color.Black
+                ),
 
-            trailingIconData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_300),
-                textColor = Color.Black,
-                iconTint = Color.Black
-            ),
+                trailingIconData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_300),
+                    textColor = Color.Black,
+                    iconTint = Color.Black
+                ),
 
-            leadingIconTrailingIconData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_blue_200),
-                textColor = Color.Black,
-                iconTint = Color.Black
+                leadingIconTrailingIconData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_blue_200),
+                    textColor = Color.Black,
+                    iconTint = Color.Black
+                )
             )
-        ))
+            )
     )
 
     DefaultTagViewContainer(tagViewData = tagViewData)
@@ -157,16 +162,14 @@ fun DefaultTagViewContainer(tagViewData: MutableList<TagViewData>) {
                 repeat(tagViewData.filter { it == item }.size) {
                     tagViewData.remove(item)
                 }
-
             }.build()
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(modifier = Modifier.height(32.dp))
 
-
-
         TagViewContainer(
-            tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers
+            tagViewData = tagViewData,
+            tagViewContainerModifiers = tagViewContainerModifiers
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -176,83 +179,86 @@ fun DefaultTagViewContainer(tagViewData: MutableList<TagViewData>) {
             onClick = {
                 val tagData = TagViewData(
                     text = "${context.getString(co.yml.coreui.feature.ytag.R.string.tag_capsule)} ${
-                        Random.nextInt(
-                            1, 20
-                        )
+                    Random.nextInt(
+                        1,
+                        20
+                    )
                     }",
                     tagViewModifiers = TagViewModifiers.Builder().width(90.dp).shape(CircleShape)
                         .backgroundColor(tagColor).textColor(Color.Black).style(textStyle).build()
                 )
                 tagViewData.add(tagData)
-            }, modifier = Modifier
+            },
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(42.dp)
         ) {
             Text(text = "Add Tag View")
         }
-
     }
 }
 
 @Composable
 fun CustomTagViewContainer() {
-
     val context = LocalContext.current
     val tagViewData = mutableListOf<TagViewData>()
 
     tagViewData.addAll(
-        (listOf(
-            capsuleTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.russian_violet),
-                textColor = Color.White
-            ),
+        (
+            listOf(
+                capsuleTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.russian_violet),
+                    textColor = Color.White
+                ),
 
-            rectangleTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_green),
-                textColor = Color.Black
-            ),
+                rectangleTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_green),
+                    textColor = Color.Black
+                ),
 
-            roundRectTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.light_yellow),
-                textColor = Color.Black
-            ),
-            TagViewData(text = stringResource(id = co.yml.coreui.feature.ytag.R.string.tag_default)),
+                roundRectTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.light_yellow),
+                    textColor = Color.Black
+                ),
+                TagViewData(text = stringResource(id = co.yml.coreui.feature.ytag.R.string.tag_default)),
 
-            leadingIconTagData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.bitter_sweet),
-                textColor = Color.White,
-                iconTint = Color.White
-            ),
+                leadingIconTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.bitter_sweet),
+                    textColor = Color.White,
+                    iconTint = Color.White
+                ),
 
-            trailingIconData(
-                context = context,
-                backgroundColor = colorResource(id = R.color.power),
-                textColor = Color.White,
-                iconTint = Color.White
-            ),
+                trailingIconData(
+                    context = context,
+                    backgroundColor = colorResource(id = R.color.power),
+                    textColor = Color.White,
+                    iconTint = Color.White
+                ),
 
-            leadingIconTrailingIconData(
-                context = context, backgroundColor = Color.Black, textColor = Color.White
-            ),
+                leadingIconTrailingIconData(
+                    context = context,
+                    backgroundColor = Color.Black,
+                    textColor = Color.White
+                ),
 
-            borderTagData(
-                context = context,
-                backgroundColor = Color.White,
-                textColor = Color.Black
-            ),
+                borderTagData(
+                    context = context,
+                    backgroundColor = Color.White,
+                    textColor = Color.Black
+                ),
 
-            shadowTagData(
-                context = context,
-                backgroundColor = colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_background_color),
-                textColor = colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_text_color)
+                shadowTagData(
+                    context = context,
+                    backgroundColor = colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_background_color),
+                    textColor = colorResource(id = co.yml.coreui.feature.ytag.R.color.tag_text_color)
+                )
             )
-        ))
+            )
     )
-
 
     CustomTagViewContainer(tagViewData = tagViewData)
 }
@@ -276,11 +282,11 @@ fun CustomTagViewContainer(tagViewData: MutableList<TagViewData>) {
                         .textColor(Color.Black).fontWeight(FontWeight.Medium).onCLick { }.build()
                 )
             ).onCLick { item ->
-
             }.build()
 
     TagViewContainer(
-        tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers
+        tagViewData = tagViewData,
+        tagViewContainerModifiers = tagViewContainerModifiers
     )
 }
 
@@ -337,30 +343,39 @@ fun roundRectTagData(context: Context, backgroundColor: Color, textColor: Color)
  * @param textColor tag view text color
  */
 fun leadingIconTagData(
-    context: Context, backgroundColor: Color, textColor: Color, iconTint: Color = Color.White
+    context: Context,
+    backgroundColor: Color,
+    textColor: Color,
+    iconTint: Color = Color.White
 ): TagViewData {
-    return TagViewData(text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_leading_icon),
+    return TagViewData(
+        text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_leading_icon),
         tagViewModifiers = TagViewModifiers.Builder().width(120.dp).maxLines(1)
             .overFlow(TextOverflow.Ellipsis).shape(CircleShape).backgroundColor(backgroundColor)
             .textColor(textColor).fontStyle(FontStyle.Italic).alphaAnimation(
                 AlphaAnimation(enabled = true)
             ).build(),
         leadingIcon = { tagViewData ->
-            IconButton(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
+            IconButton(
+                modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
                 onClick = {
                     if (tagViewData.enabled) {
                         Toast.makeText(
-                            context, tagViewData.text, Toast.LENGTH_SHORT
+                            context,
+                            tagViewData.text,
+                            Toast.LENGTH_SHORT
                         ).show()
                     }
-                }) {
+                }
+            ) {
                 Icon(
                     painter = painterResource(id = co.yml.coreui.feature.ytag.R.drawable.ic_location_24px),
                     contentDescription = null,
                     tint = iconTint
                 )
             }
-        })
+        }
+    )
 }
 
 /**
@@ -370,31 +385,41 @@ fun leadingIconTagData(
  */
 @Composable
 fun trailingIconData(
-    context: Context, backgroundColor: Color, textColor: Color, iconTint: Color = Color.White
+    context: Context,
+    backgroundColor: Color,
+    textColor: Color,
+    iconTint: Color = Color.White
 ): TagViewData {
-    return TagViewData(text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_trailing_icon),
+    return TagViewData(
+        text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_trailing_icon),
         tagViewModifiers = TagViewModifiers.Builder().width(150.dp).maxLines(1)
             .textAlign(TextAlign.Start).overFlow(TextOverflow.Ellipsis).shape(CircleShape)
             .backgroundColor(backgroundColor).textColor(textColor).fontSize(15.sp).alphaAnimation(
                 AlphaAnimation(enabled = true)
             ).build(),
         trailingIcon = { tagViewData ->
-            IconButton(modifier = Modifier
-                .padding(end = dimensionResource(id = R.dimen.padding_medium))
-                .size(dimensionResource(id = R.dimen.padding_normal_medium)), onClick = {
-                if (tagViewData.enabled) {
-                    Toast.makeText(
-                        context, tagViewData.text, Toast.LENGTH_SHORT
-                    ).show()
+            IconButton(
+                modifier = Modifier
+                    .padding(end = dimensionResource(id = R.dimen.padding_medium))
+                    .size(dimensionResource(id = R.dimen.padding_normal_medium)),
+                onClick = {
+                    if (tagViewData.enabled) {
+                        Toast.makeText(
+                            context,
+                            tagViewData.text,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }) {
+            ) {
                 Icon(
                     painter = painterResource(id = co.yml.coreui.feature.ytag.R.drawable.ic_close_20px),
                     contentDescription = null,
                     tint = iconTint
                 )
             }
-        })
+        }
+    )
 }
 
 /**
@@ -403,9 +428,13 @@ fun trailingIconData(
  * @param textColor tag view text color
  */
 fun leadingIconTrailingIconData(
-    context: Context, backgroundColor: Color, textColor: Color, iconTint: Color = Color.White
+    context: Context,
+    backgroundColor: Color,
+    textColor: Color,
+    iconTint: Color = Color.White
 ): TagViewData {
-    return TagViewData(text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_leading_trailing_icon),
+    return TagViewData(
+        text = context.getString(co.yml.coreui.feature.ytag.R.string.tag_leading_trailing_icon),
         tagViewModifiers = TagViewModifiers.Builder().width(140.dp).maxLines(1)
             .overFlow(TextOverflow.Ellipsis).shape(CircleShape).backgroundColor(backgroundColor)
             .maxLines(1).overFlow(TextOverflow.Ellipsis).textColor(textColor).onCLick {}
@@ -413,12 +442,14 @@ fun leadingIconTrailingIconData(
                 AlphaAnimation(enabled = true)
             ).build(),
         leadingIcon = { tagViewData ->
-            IconButton(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
+            IconButton(
+                modifier = Modifier.size(dimensionResource(id = R.dimen.padding_normal_medium)),
                 onClick = {
                     if (tagViewData.enabled) {
                         Toast.makeText(context, tagViewData.text, Toast.LENGTH_SHORT).show()
                     }
-                }) {
+                }
+            ) {
                 Icon(
                     painter = painterResource(id = co.yml.coreui.feature.ytag.R.drawable.ic_location_24px),
                     contentDescription = null,
@@ -427,20 +458,24 @@ fun leadingIconTrailingIconData(
             }
         },
         trailingIcon = { tagViewData ->
-            IconButton(modifier = Modifier
-                .padding(end = dimensionResource(id = R.dimen.padding_medium))
-                .size(dimensionResource(id = R.dimen.padding_normal_small)), onClick = {
-                if (tagViewData.enabled) {
-                    Toast.makeText(context, tagViewData.text, Toast.LENGTH_SHORT).show()
+            IconButton(
+                modifier = Modifier
+                    .padding(end = dimensionResource(id = R.dimen.padding_medium))
+                    .size(dimensionResource(id = R.dimen.padding_normal_small)),
+                onClick = {
+                    if (tagViewData.enabled) {
+                        Toast.makeText(context, tagViewData.text, Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }) {
+            ) {
                 Icon(
                     painter = painterResource(id = co.yml.coreui.feature.ytag.R.drawable.ic_close_20px),
                     contentDescription = null,
                     tint = iconTint
                 )
             }
-        })
+        }
+    )
 }
 
 @Composable
@@ -469,7 +504,7 @@ fun borderTagData(
 fun shadowTagData(
     context: Context,
     backgroundColor: Color,
-    textColor: Color,
+    textColor: Color
 ): TagViewData {
     val tagViewModifiers = TagViewModifiers.Builder().width(100.dp)
         .textColor(textColor)
