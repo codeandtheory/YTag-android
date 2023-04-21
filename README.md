@@ -30,7 +30,7 @@ It consist of a leading icon(optional), Text and a trailing icon (optional).
 **Basic**
 
 ```
-TagViewData(text ="Default")
+TagView(text ="Default")
 ```
 
 **Customizations**
@@ -67,7 +67,7 @@ val trailingIcon =  { tagViewData ->
       }
     }     
     
-TagViewData( text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leadingIcon, trailingIcon = trailingIcon)
+TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leadingIcon, trailingIcon = trailingIcon,  enabled = true)
 ```
 
 ** Y Tag Container **
