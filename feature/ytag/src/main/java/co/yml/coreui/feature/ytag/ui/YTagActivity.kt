@@ -185,7 +185,7 @@ fun DefaultTagViewContainer(tagViewData: MutableList<TagViewData>) {
                     )
                     }",
                     tagViewModifiers = TagViewModifiers.Builder().width(90.dp).shape(CircleShape)
-                        .backgroundColor(tagColor).textColor(Color.Black).style(textStyle).build()
+                        .backgroundColor(tagColor).textColor(Color.Black).style(textStyle).alphaAnimation(AlphaAnimation(enabled = true)).build()
                 )
                 tagViewData.add(tagData)
             },

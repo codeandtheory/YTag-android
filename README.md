@@ -67,7 +67,7 @@ val trailingIcon =  { tagViewData ->
       }
     }     
     
-TagViewData(text, tagViewModifiers, leadingIcon, trailingIcon)
+TagViewData( text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leadingIcon, trailingIcon = trailingIcon)
 ```
 
 ** Y Tag Container **
@@ -106,12 +106,14 @@ TagViewData(text, tagViewModifiers, leadingIcon, trailingIcon)
      ).onCLick {}
      .build()
      
-    TagViewContainer(tagViewData, tagViewContainerModifiers)  
+    TagViewContainer(tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers)  
 ```
 
 ### Screenshots
 
 ![](../../Downloads/Screenshot_20230419-133622_CoreUICatalogApp.jpg)
+
+![Demo](../../Downloads/y_tag_13_s.gif)
 
 ### How to generate test report
 
