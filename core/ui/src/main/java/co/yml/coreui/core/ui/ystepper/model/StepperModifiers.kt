@@ -84,6 +84,10 @@ data class StepperModifiers (
     val onClick: () -> Unit,
     val leadingIcon: StepperIcon,
     val trailingIcon: StepperIcon,
+    val deleteIcon: StepperIcon,
+    val minValue: Int,
+    val maxValues: Int,
+    val stepValue: Int,
     val semantics: String){
 
     class Builder {
@@ -118,6 +122,10 @@ data class StepperModifiers (
         private var onClick: () -> Unit = {}
         private var leadingIcon: StepperIcon = StepperIcon(icon = R.drawable.ic_remove_20px, iconTint = Color.Black, onClickListener = {})
         private var trailingIcon: StepperIcon = StepperIcon(icon = R.drawable.ic_add_20px, iconTint = Color.Black, onClickListener = {})
+        private var deleteIcon: StepperIcon = StepperIcon(icon = R.drawable.ic_delete_20px, iconTint = Color.Black, onClickListener = {})
+        private var minValue: Int = 1
+        private var maxValue: Int = Int.MAX_VALUE
+        private var stepValue: Int = 1
         private var semantics: String = text
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
@@ -182,6 +190,14 @@ data class StepperModifiers (
 
         fun trailingIcon(trailingIcon: StepperIcon) = apply { this.trailingIcon = trailingIcon }
 
+        fun deleteIcon(deleteIcon: StepperIcon) = apply { this.deleteIcon = deleteIcon }
+
+        fun minValue(minValue: Int) = apply { this.minValue = minValue }
+
+        fun maxValue(maxValue: Int) = apply { this.maxValue = maxValue }
+
+        fun stepValue(stepValue: Int) = apply { this.stepValue = stepValue }
+
         fun semantics(semantics: String) = apply { this.semantics = semantics }
 
         fun build() = StepperModifiers(
@@ -216,6 +232,10 @@ data class StepperModifiers (
             onClick,
             leadingIcon,
             trailingIcon,
+            deleteIcon,
+            minValue,
+            maxValue,
+            stepValue,
             semantics
         )
     }

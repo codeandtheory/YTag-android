@@ -8,7 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -25,12 +25,19 @@ import co.yml.coreui.ui.R
 
 @Composable
 fun StepperView(
-    textView: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
+    textView: @Composable (() -> Unit) ? = null,
+    leadingIcon: @Composable (() -> Unit) ? = null,
+    trailingIcon: @Composable (() -> Unit) ? = null,
+    deleteIcon: @Composable (() -> Unit) ? =null,
     enabled: Boolean = true,
     stepperModifier: StepperModifiers
 ) {
+    var isMinValueReached by remember {
+        mutableStateOf(false)
+    }
+
+    isMinValueReached = stepperModifier.text.toInt() == stepperModifier.minValue
+
     with(stepperModifier) {
         var modifiers = if (width == Dp.Unspecified) {
             Modifier.fillMaxWidth()
@@ -81,37 +88,73 @@ fun StepperView(
             ) {
                 val (leading_icon, text_view, trailing_icon) = createRefs()
 
-                leadingIcon?.let {
-                    Box(
-                        modifier = Modifier
-                            .constrainAs(leading_icon) {
-                                start.linkTo(parent.start)
-                                top.linkTo(parent.top)
-                                bottom.linkTo(parent.bottom)
+                //Leading Icon
+                if (isMinValueReached.not()) {
+                    leadingIcon?.let {
+                        Box(
+                            modifier = Modifier
+                                .constrainAs(leading_icon) {
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                }
+                        ) {
+                            leadingIcon.invoke()
+                        }
+                    } ?: kotlin.run {
+                        Box(
+                            modifier = Modifier
+                                .constrainAs(leading_icon) {
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                }
+                        ) {
+                            IconButton(onClick = {
+                                stepperModifier.leadingIcon.onClickListener.invoke()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_remove_20px),
+                                    contentDescription = null
+                                )
                             }
-                    ) {
-                        leadingIcon.invoke()
+                        }
                     }
-                } ?: kotlin.run {
-                    Box(
-                        modifier = Modifier
-                            .constrainAs(leading_icon) {
-                                start.linkTo(parent.start)
-                                top.linkTo(parent.top)
-                                bottom.linkTo(parent.bottom)
+                }else{
+                    //Delete Icon
+                    deleteIcon?.let {
+                        Box(
+                            modifier = Modifier
+                                .constrainAs(leading_icon) {
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                }
+                        ) {
+                            deleteIcon.invoke()
+                        }
+                    } ?: kotlin.run {
+                        Box(
+                            modifier = Modifier
+                                .constrainAs(leading_icon) {
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                }
+                        ) {
+                            IconButton(onClick = {
+                                stepperModifier.deleteIcon.onClickListener.invoke()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_delete_20px),
+                                    contentDescription = null
+                                )
                             }
-                    ) {
-                        IconButton(onClick = {
-                            stepperModifier.leadingIcon.onClickListener.invoke()
-                        }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_remove_20px),
-                                contentDescription = null
-                            )
                         }
                     }
                 }
 
+                //Text view
                 textView?.let {
                     Box(modifier = Modifier.constrainAs(text_view) {
                         start.linkTo(leading_icon.end)
@@ -157,6 +200,7 @@ fun StepperView(
                     }
                 }
 
+                //Trailing Icon
                 trailingIcon?.let {
                     Box(
                         modifier = Modifier
