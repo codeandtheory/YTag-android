@@ -7,5 +7,6 @@ class StepperIcon(
     val icon: Int,
     val iconTint: Color,
     val onClickListener: () -> Unit = {},
-    val enable: Boolean = true
+    val enable: Boolean = true,
+    val semantics: String? =null
 )

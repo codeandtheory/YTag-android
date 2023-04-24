@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +30,7 @@ fun StepperView(
     trailingIcon: @Composable (() -> Unit)? = null,
     deleteIcon: @Composable (() -> Unit)? = null,
     visible: Boolean = true,
-    stepperModifier: StepperModifiers,
+    stepperModifier: StepperModifiers = StepperModifiers.Builder().build(),
 ) {
     with(stepperModifier) {
         var modifiers = if (width == Dp.Unspecified) {
@@ -85,6 +86,7 @@ fun StepperView(
                         deleteIcon?.let {
                             Box(
                                 modifier = Modifier
+                                    .testTag("delete_icon_custom")
                                     .constrainAs(leading_icon) {
                                         start.linkTo(parent.start)
                                         top.linkTo(parent.top)
@@ -96,6 +98,7 @@ fun StepperView(
                         } ?: kotlin.run {
                             Box(
                                 modifier = Modifier
+                                    .testTag("delete_icon_default")
                                     .constrainAs(leading_icon) {
                                         start.linkTo(parent.start)
                                         top.linkTo(parent.top)
@@ -107,7 +110,9 @@ fun StepperView(
                                 }) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_delete_20px),
-                                        contentDescription = null
+                                        contentDescription = stepperModifier.deleteIcon.semantics ?: stringResource(
+                                            id = R.string.ic_delete_accessibility
+                                        )
                                     )
                                 }
                             }
@@ -116,6 +121,7 @@ fun StepperView(
                         leadingIcon?.let {
                             Box(
                                 modifier = Modifier
+                                    .testTag("leading_icon_custom")
                                     .constrainAs(leading_icon) {
                                         start.linkTo(parent.start)
                                         top.linkTo(parent.top)
@@ -127,6 +133,7 @@ fun StepperView(
                         } ?: kotlin.run {
                             Box(
                                 modifier = Modifier
+                                    .testTag("leading_icon_default")
                                     .constrainAs(leading_icon) {
                                         start.linkTo(parent.start)
                                         top.linkTo(parent.top)
@@ -135,10 +142,12 @@ fun StepperView(
                             ) {
                                 IconButton(enabled = stepperModifier.leadingIcon.enable, onClick = {
                                     stepperModifier.leadingIcon.onClickListener.invoke()
-                                }) {
+                                }, modifier = Modifier.testTag("leading_icon_button_default")) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_remove_20px),
-                                        contentDescription = null
+                                        contentDescription = stepperModifier.leadingIcon.semantics ?: stringResource(
+                                            id = R.string.ic_remove_accessibility
+                                        )
                                     )
                                 }
                             }
@@ -147,7 +156,8 @@ fun StepperView(
 
                     //Text view
                     textView?.let {
-                        Box(modifier = Modifier.constrainAs(text_view) {
+                        Box(modifier = Modifier.testTag("text_view_custom")
+                            .constrainAs(text_view) {
                             start.linkTo(leading_icon.end)
                             end.linkTo(trailing_icon.start)
                             top.linkTo(parent.top)
@@ -157,7 +167,8 @@ fun StepperView(
                             textView.invoke()
                         }
                     } ?: kotlin.run {
-                        Box(modifier = Modifier.constrainAs(text_view) {
+                        Box(modifier = Modifier.testTag("text_view_default")
+                            .constrainAs(text_view) {
                             start.linkTo(leading_icon.end)
                             end.linkTo(trailing_icon.start)
                             top.linkTo(parent.top)
@@ -180,7 +191,6 @@ fun StepperView(
                                         this.contentDescription = semantics
                                     },
                                 style = style,
-                                textDecoration = textDecoration,
                                 textAlign = textAlign,
                                 lineHeight = lineHeight,
                                 overflow = overflow,
@@ -195,6 +205,7 @@ fun StepperView(
                     trailingIcon?.let {
                         Box(
                             modifier = Modifier
+                                .testTag("trailing_icon_custom")
                                 .constrainAs(trailing_icon) {
                                     end.linkTo(parent.end)
                                     top.linkTo(parent.top)
@@ -206,6 +217,7 @@ fun StepperView(
                     } ?: kotlin.run {
                         Box(
                             modifier = Modifier
+                                .testTag("trailing_icon_default")
                                 .constrainAs(trailing_icon) {
                                     end.linkTo(parent.end)
                                     top.linkTo(parent.top)
@@ -214,10 +226,12 @@ fun StepperView(
                         ) {
                             IconButton(enabled = stepperModifier.trailingIcon.enable, onClick = {
                                 stepperModifier.trailingIcon.onClickListener.invoke()
-                            }) {
+                            },modifier = Modifier.testTag("trailing_icon_button_default")) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_add_20px),
-                                    contentDescription = null
+                                    contentDescription = stepperModifier.trailingIcon.semantics ?: stringResource(
+                                        id = R.string.ic_add_accessibility
+                                    )
                                 )
                             }
                         }

@@ -127,7 +127,7 @@ data class StepperModifiers (
         private var minValue: Int = 1
         private var maxValue: Int = Int.MAX_VALUE
         private var stepValue: Int = 1
-        private var showDeleteIcon = true
+        private var showDeleteIcon = false
         private var semantics: String = text
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
