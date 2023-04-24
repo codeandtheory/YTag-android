@@ -1,6 +1,7 @@
 package co.yml.coreui.feature.ytag.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -62,9 +63,35 @@ class YStepperActivity : ComponentActivity() {
 
 @Composable
 fun DefaultStepper() {
+    val minValue = 1
+    val maxValue = 10
+
     var count by remember {
-        mutableStateOf(0)
+        mutableStateOf(minValue)
     }
+
+    var enableLeadingIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var enableTrailingIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var showDeleteIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var stepperVisibility  by remember {
+        mutableStateOf(true)
+    }
+
+    enableLeadingIcon = count > minValue
+    showDeleteIcon = count <= minValue
+    enableTrailingIcon = count < maxValue
+
+
+    Log.i("check_min_value", "data: false")
 
     val stepperModifiers = StepperModifiers.Builder()
         .width(140.dp)
@@ -75,34 +102,72 @@ fun DefaultStepper() {
         .text(count.toString())
         .textColor(Color.Black)
         .shape(CircleShape)
+        .showDeleteIcon(showDeleteIcon)
         .leadingIcon(
             StepperIcon(
+                enable = enableLeadingIcon,
                 icon = R.drawable.ic_remove_20px,
                 iconTint = Color.Black,
                 onClickListener = {
                     count -= 1
-                })
+                },
+            )
         )
+
         .trailingIcon(
             StepperIcon(
+                enable = enableTrailingIcon,
                 icon = R.drawable.ic_add_20px,
                 iconTint = Color.Black,
                 onClickListener = {
                     count += 1
                 })
         )
+        .deleteIcon(
+            StepperIcon(
+                icon = R.drawable.ic_delete_20px,
+                iconTint = Color.Black,
+                onClickListener = {
+                    stepperVisibility = false
+                }
+            )
+        )
         .build()
 
     StepperView(
+        visible = stepperVisibility,
         stepperModifier = stepperModifiers
     )
 }
 
 @Composable
 fun CustomStepper() {
+    val minValue = 1
+    val maxValue = 10
+
     var count by remember {
-        mutableStateOf(0)
+        mutableStateOf(minValue)
     }
+
+    var enableLeadingIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var enableTrailingIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var showDeleteIcon by remember {
+        mutableStateOf(true)
+    }
+
+    var stepperVisibility  by remember {
+        mutableStateOf(true)
+    }
+
+    enableLeadingIcon = count > minValue
+    showDeleteIcon = count <= minValue
+    enableTrailingIcon = count < maxValue
 
     val stepperModifiers = StepperModifiers.Builder()
         .width(140.dp)
@@ -111,16 +176,18 @@ fun CustomStepper() {
         .text(count.toString())
         .textColor(Color.Black)
         .shape(CircleShape)
+        .showDeleteIcon(showDeleteIcon)
         .build()
 
     StepperView(
+        visible = stepperVisibility,
         stepperModifier = stepperModifiers,
         textView = {
             Text(text = "$count")
         },
         leadingIcon = {
-            IconButton(onClick = {
-                count -=2
+            IconButton(enabled = enableLeadingIcon, onClick = {
+                count -= 2
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_remove_20px),
@@ -129,11 +196,21 @@ fun CustomStepper() {
             }
         },
         trailingIcon = {
-            IconButton(onClick = {
-                count +=2
+            IconButton(enabled = enableTrailingIcon, onClick = {
+                count += 2
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add_20px),
+                    contentDescription = null
+                )
+            }
+        },
+        deleteIcon = {
+            IconButton(enabled = enableTrailingIcon, onClick = {
+                stepperVisibility = false
+            }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_delete_20px),
                     contentDescription = null
                 )
             }

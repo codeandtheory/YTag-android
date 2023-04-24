@@ -86,8 +86,9 @@ data class StepperModifiers (
     val trailingIcon: StepperIcon,
     val deleteIcon: StepperIcon,
     val minValue: Int,
-    val maxValues: Int,
+    val maxValue: Int,
     val stepValue: Int,
+    val showDeleteIcon: Boolean,
     val semantics: String){
 
     class Builder {
@@ -126,6 +127,7 @@ data class StepperModifiers (
         private var minValue: Int = 1
         private var maxValue: Int = Int.MAX_VALUE
         private var stepValue: Int = 1
+        private var showDeleteIcon = true
         private var semantics: String = text
 
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
@@ -198,6 +200,8 @@ data class StepperModifiers (
 
         fun stepValue(stepValue: Int) = apply { this.stepValue = stepValue }
 
+        fun showDeleteIcon(showDeleteIcon: Boolean) = apply { this.showDeleteIcon = showDeleteIcon }
+
         fun semantics(semantics: String) = apply { this.semantics = semantics }
 
         fun build() = StepperModifiers(
@@ -236,6 +240,7 @@ data class StepperModifiers (
             minValue,
             maxValue,
             stepValue,
+            showDeleteIcon,
             semantics
         )
     }

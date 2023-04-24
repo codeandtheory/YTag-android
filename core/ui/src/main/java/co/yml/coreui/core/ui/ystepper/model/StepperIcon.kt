@@ -6,5 +6,6 @@ import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
 class StepperIcon(
     val icon: Int,
     val iconTint: Color,
-    val onClickListener: () -> Unit = {}
+    val onClickListener: () -> Unit = {},
+    val enable: Boolean = true
 )
