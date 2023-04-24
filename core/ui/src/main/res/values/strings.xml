@@ -4,4 +4,10 @@
     <string name="title_y_tag">Tags</string>
     <string name="more">more</string>
     <string name="tag_view_container_accessibility_title">Tag view container</string>
+    <string name="title_y_stepper">Stepper</string>
+    <string name="ic_add_accessibility">Add</string>
+    <string name="ic_remove_accessibility">Remove</string>
+    <string name="ic_delete_accessibility">Remove</string>
+    <string name="stepper_view_accessibility">Stepper View</string>
+
 </resources>

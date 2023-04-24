@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import co.yml.coreui.core.ui.templates.AppBar
 import co.yml.coreui.core.ui.theme.CoreUICatalogTheme
+import co.yml.coreui.feature.ytag.ui.YStepperActivity
 import co.yml.coreui.feature.ytag.ui.YTagActivity
 import co.yml.coreui.ui.R
 import co.yml.coreui.ui.presentation.CoreUIComponents
@@ -46,6 +47,15 @@ class MainActivity : ComponentActivity() {
                                 Intent(
                                     this@MainActivity,
                                     YTagActivity::class.java
+                                )
+                            )
+                        })
+
+                        CoreUIComponents(title = getString(R.string.title_y_stepper), onClick = {
+                            startActivity(
+                                Intent(
+                                    this@MainActivity,
+                                    YStepperActivity::class.java
                                 )
                             )
                         })

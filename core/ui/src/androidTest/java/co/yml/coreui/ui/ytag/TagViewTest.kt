@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.yml.coreui.core.ui.ytag.TagView
+import co.yml.coreui.core.ui.ytag.model.TagViewData
 import co.yml.coreui.core.ui.ytag.model.TagViewModifiers
 import org.junit.Rule
 import org.junit.Test
@@ -32,8 +33,8 @@ class TagViewTest {
 
     private fun launchYTag(
         text: String,
-        leadingIcon: @Composable ((Boolean) -> Unit)? = null,
-        trailingIcon: @Composable ((Boolean) -> Unit)? = null,
+        leadingIcon: @Composable ((TagViewData) -> Unit)? = null,
+        trailingIcon: @Composable ((TagViewData) -> Unit)? = null,
         tagViewModifiers: TagViewModifiers = TagViewModifiers.Builder().build(),
         enabled: Boolean = true
     ) {
