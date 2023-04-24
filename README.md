@@ -111,9 +111,8 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
 
 ### Screenshots
 
-![](../../Downloads/Screenshot_20230419-133622_CoreUICatalogApp.jpg)
-
-![Demo](../../Downloads/y_tag_13_s.gif)
+<img src="screenshots/Stepper_Screenshot_1.jpg"/>
+<img src="screenshots/y_tag_13_s.gif"/>
 
 ### How to generate test report
 
