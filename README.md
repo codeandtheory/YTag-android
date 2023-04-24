@@ -70,7 +70,7 @@ val trailingIcon =  { tagViewData ->
 TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leadingIcon, trailingIcon = trailingIcon,  enabled = true)
 ```
 
-** Y Tag Container **
+**Y Tag Container**
 
 ```
  val tagViewData = remember {
