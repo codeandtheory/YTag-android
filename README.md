@@ -70,7 +70,7 @@ val trailingIcon =  { tagViewData ->
 TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leadingIcon, trailingIcon = trailingIcon,  enabled = true)
 ```
 
-** Y Tag Container **
+**Y Tag Container**
 
 ```
  val tagViewData = remember {
@@ -112,6 +112,9 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
 ### Screenshots
 
 <img src="screenshots/Stepper_Screenshot_1.jpg"/>
+
+### Demo
+
 <img src="screenshots/y_tag_13_s.gif"/>
 
 ### How to generate test report
