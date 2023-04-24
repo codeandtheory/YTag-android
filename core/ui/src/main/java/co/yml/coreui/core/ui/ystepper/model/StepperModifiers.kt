@@ -50,7 +50,7 @@ import co.yml.coreui.ui.R
  * @param shadowElevation  The size of the shadow below the surface.
  * @param containerPaddingValues define padding for Stepper
  * @param onClick perform click event
- * @param semantics add content description for Stepper view
+ * @param textViewSemantics add content description for Stepper view
  */
 data class StepperModifiers (
     val minWidth: Dp,
@@ -89,7 +89,8 @@ data class StepperModifiers (
     val maxValue: Int,
     val stepValue: Int,
     val showDeleteIcon: Boolean,
-    val semantics: String){
+    val textViewSemantics: String,
+    val stepperViewSemantics: String?){
 
     class Builder {
         private var minWidth: Dp = 80.dp
@@ -128,8 +129,8 @@ data class StepperModifiers (
         private var maxValue: Int = Int.MAX_VALUE
         private var stepValue: Int = 1
         private var showDeleteIcon = false
-        private var semantics: String = text
-
+        private var textViewSemantics: String = text
+        private var stepperViewSemantics: String? = null
         fun minWidth(minWidth: Dp) = apply { this.minWidth = minWidth }
 
         fun minHeight(minHeight: Dp) = apply { this.minHeight = minHeight }
@@ -202,7 +203,9 @@ data class StepperModifiers (
 
         fun showDeleteIcon(showDeleteIcon: Boolean) = apply { this.showDeleteIcon = showDeleteIcon }
 
-        fun semantics(semantics: String) = apply { this.semantics = semantics }
+        fun textViewSemantics(textViewSemantics: String) = apply { this.textViewSemantics = textViewSemantics }
+
+        fun stepperViewSemantics(stepperViewSemantics: String) = apply { this.stepperViewSemantics = stepperViewSemantics }
 
         fun build() = StepperModifiers(
             minWidth,
@@ -241,7 +244,8 @@ data class StepperModifiers (
             maxValue,
             stepValue,
             showDeleteIcon,
-            semantics
+            textViewSemantics,
+            stepperViewSemantics
         )
     }
 }

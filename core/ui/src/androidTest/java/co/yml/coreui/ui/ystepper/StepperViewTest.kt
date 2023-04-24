@@ -207,7 +207,7 @@ class StepperViewTest {
     fun text_view_semantics_added(){
         val semantics = "count"
 
-        val stepperModifiers = StepperModifiers.Builder().semantics(semantics).build()
+        val stepperModifiers = StepperModifiers.Builder().textViewSemantics(semantics).build()
         launchStepper(stepperModifiers = stepperModifiers)
 
         composeTestRule.onNodeWithContentDescription(semantics, useUnmergedTree = true)
