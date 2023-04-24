@@ -110,10 +110,12 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
 ```
 
 ### Screenshots
+![Screenshot_20230419-133622_CoreUICatalogApp](https://user-images.githubusercontent.com/96101654/233907333-4f44a9bb-bd50-4efd-adc3-2fdd0380cf89.jpg)
 
-![](../../Downloads/Screenshot_20230419-133622_CoreUICatalogApp.jpg)
+### Demo
 
-![Demo](../../Downloads/y_tag_13_s.gif)
+![y_tag_13_s](https://user-images.githubusercontent.com/96101654/233907397-7a412d44-72c4-421c-8c07-08cce5087280.gif)
+
 
 ### How to generate test report
 
