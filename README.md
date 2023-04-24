@@ -1,15 +1,13 @@
 # AndroidYCoreUI
-==================
+
 
 ## Y Tags
-==================
 
 Y Tag is a UI element in Android (some times referred to as chips) which displays a piece of
 information.
 It consist of a leading icon(optional), Text and a trailing icon (optional).
 
-### Features
-==================
+## Features
 
 - Fully customizable
   - Shape
@@ -24,8 +22,8 @@ It consist of a leading icon(optional), Text and a trailing icon (optional).
     tag which is configurable.
 - Built with Compose UI
 
-### Usage
-==================
+## Usage
+
 
 **Basic**
 
@@ -109,11 +107,11 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
     TagViewContainer(tagViewData = tagViewData, tagViewContainerModifiers = tagViewContainerModifiers)  
 ```
 
-### Screenshots
+## Screenshots
 
 <img src="screenshots/Stepper_Screenshot_1.jpg"/>
 
-### Demo
+## Demo
 
 <img src="screenshots/y_tag_13_s.gif"/>
 
