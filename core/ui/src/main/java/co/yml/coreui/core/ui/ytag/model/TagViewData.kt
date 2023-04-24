@@ -23,4 +23,4 @@ data class TagViewData(
     val overFlowText: (Int) -> String = { _ -> "" }
 )
 
-data class AlphaAnimation(var enabled: Boolean = true, val durationMillis: Int = 650)
+data class AlphaAnimation(var enabled: Boolean = false, val durationMillis: Int = 650)

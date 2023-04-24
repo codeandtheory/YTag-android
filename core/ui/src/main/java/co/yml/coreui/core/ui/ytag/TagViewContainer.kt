@@ -124,16 +124,16 @@ fun TagViewContainer(
 
                         // over flow item
                         with(moreTag) {
-                            val tagViewModifiers = tagViewModifiers.copy(onClick = {
-                                tagViewContainerModifiers.onClick.invoke(moreTag)
+                            val tagViewModifiers = moreTag.tagViewModifiers.copy(onClick = {
+                                moreTag.tagViewModifiers.onClick.invoke(moreTag)
                             })
                             TagView(
-                                text = overFlowText.value,
+                                text = "",
                                 leadingIcon = leadingIcon,
                                 trailingIcon = trailingIcon,
                                 enabled = enabled,
                                 tagViewModifiers = tagViewModifiers,
-                                overFlowText = ""
+                                overFlowText = overFlowText.value
                             )
                         }
                     }
