@@ -22,7 +22,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "CoreUICatalog"
+rootProject.name = "YTag"
 include(":app")
 include(":core:ui")
 include(":core:common")

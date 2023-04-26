@@ -4,7 +4,7 @@ import com.android.build.gradle.AppExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import co.yml.coreui.jacoco.setupJacocoPlugin
+import co.yml.ytag.jacoco.setupJacocoPlugin
 
 /**
  * Application jacoco convention plugin

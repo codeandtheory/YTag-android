@@ -20,12 +20,12 @@ class FeatureConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("versionCatalogLibs")
 
             pluginManager.apply {
-                apply("co.yml.coreui.library")
-                apply("co.yml.coreui.hilt")
+                apply("co.yml.ytag.library")
+                apply("co.yml.ytag.hilt")
             }
             extensions.configure<LibraryExtension> {
                 defaultConfig {
-                    testInstrumentationRunner = "co.yml.coreui.core.test.HiltTestRunner"
+                    testInstrumentationRunner = "co.yml.ytag.core.test.HiltTestRunner"
                 }
             }
 

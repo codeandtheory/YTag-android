@@ -1,7 +1,4 @@
-# AndroidYCoreUI
-
-
-## Y Tags
+# Y Tags
 
 Y Tag is a UI element in Android (some times referred to as chips) which displays a piece of
 information.

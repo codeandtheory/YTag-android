@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "co.yml.coreui.buildlogic"
+group = "co.yml.ytag.buildlogic"
 
 repositories {
     mavenCentral()
@@ -22,58 +22,58 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "co.yml.coreui.application"
+            id = "co.yml.ytag.application"
             implementationClass = "conventions.ApplicationConventionPlugin"
         }
 
         register("androidApplicationCompose") {
-            id = "co.yml.coreui.application.compose"
+            id = "co.yml.ytag.application.compose"
             implementationClass = "conventions.ComposeApplicationConventionPlugin"
         }
 
         register("androidApplicationJacoco") {
-            id = "co.yml.coreui.application.jacoco"
+            id = "co.yml.ytag.application.jacoco"
             implementationClass = "conventions.ApplicationJacocoConventionPlugin"
         }
 
         register("androidLibraryCompose") {
-            id = "co.yml.coreui.library.compose"
+            id = "co.yml.ytag.library.compose"
             implementationClass = "conventions.LibraryComposeConventionPlugin"
         }
 
         register("androidLibrary") {
-            id = "co.yml.coreui.library"
+            id = "co.yml.ytag.library"
             implementationClass = "conventions.LibraryConventionPlugin"
         }
 
         register("androidLibraryJacoco") {
-            id = "co.yml.coreui.library.jacoco"
+            id = "co.yml.ytag.library.jacoco"
             implementationClass = "conventions.LibraryJacocoConventionPlugin"
         }
 
         register("androidProjectJacoco") {
-            id = "co.yml.coreui.project.jacoco"
+            id = "co.yml.ytag.project.jacoco"
             implementationClass = "conventions.ProjectJacocoConventionPlugin"
         }
 
         register("kotlinLibraryJacoco") {
-            id = "co.yml.coreui.library.kotlin.jacoco"
+            id = "co.yml.ytag.library.kotlin.jacoco"
             implementationClass = "conventions.KotlinLibraryJacocoConventionPlugin"
         }
 
 
         register("androidFeature") {
-            id = "co.yml.coreui.feature"
+            id = "co.yml.ytag.feature"
             implementationClass = "conventions.FeatureConventionPlugin"
         }
 
         register("androidHilt") {
-            id = "co.yml.coreui.hilt"
+            id = "co.yml.ytag.hilt"
             implementationClass = "conventions.HiltConventionPlugin"
         }
 
         register("androidTest") {
-            id = "co.yml.coreui.test"
+            id = "co.yml.ytag.test"
             implementationClass = "conventions.AndroidTestConventionPlugin"
         }
     }

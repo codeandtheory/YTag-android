@@ -6,8 +6,8 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
-import co.yml.coreui.configureFlavors
-import co.yml.coreui.configureKotlinAndroid
+import co.yml.ytag.configureFlavors
+import co.yml.ytag.configureKotlinAndroid
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.kotlin
 

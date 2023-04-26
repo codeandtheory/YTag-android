@@ -1,11 +1,11 @@
-import co.yml.coreui.jacoco.setModuleTestCoverageLimits
+import co.yml.ytag.jacoco.setModuleTestCoverageLimits
 
 @Suppress("DSL_SCOPE_VIOLATION") // scope violation issue: work around suggested from: https://github.com/gradle/gradle/issues/22797
 plugins {
-    id("co.yml.coreui.feature")
-    id("co.yml.coreui.library.compose")
-    id("co.yml.coreui.library")
-    id("co.yml.coreui.library.jacoco")
+    id("co.yml.ytag.feature")
+    id("co.yml.ytag.library.compose")
+    id("co.yml.ytag.library")
+    id("co.yml.ytag.library.jacoco")
 }
 
 private val limits = mutableMapOf(
@@ -19,7 +19,7 @@ private val limits = mutableMapOf(
 setModuleTestCoverageLimits(limits)
 
 android {
-    namespace = "co.yml.coreui.feature.ytag"
+    namespace = "co.yml.ytag.feature.ytag"
 }
 
 dependencies {
