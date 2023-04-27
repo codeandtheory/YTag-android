@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CoreUICatalogApp</string>
+    <string name="app_name">YTag</string>
     <string name="title_y_tag">Tags</string>
     <string name="more">more</string>
     <string name="tag_view_container_accessibility_title">Tag view container</string>

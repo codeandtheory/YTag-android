@@ -1,15 +1,15 @@
 @Suppress("DSL_SCOPE_VIOLATION") // scope violation issue: work around suggested from: https://github.com/gradle/gradle/issues/22797
 plugins {
-    id("co.yml.coreui.application")
-    id("co.yml.coreui.application.jacoco")
-    id("co.yml.coreui.application.compose")
-    id("co.yml.coreui.hilt")
+    id("co.yml.ytag.application")
+    id("co.yml.ytag.application.jacoco")
+    id("co.yml.ytag.application.compose")
+    id("co.yml.ytag.hilt")
 }
 
 android {
-    namespace = "co.yml.coreui"
+    namespace = "co.yml.ytag"
     defaultConfig {
-        applicationId = "co.yml.coreui"
+        applicationId = "co.yml.ytag"
         versionCode = 1
         versionName = "1.0"
     }

@@ -1,16 +1,16 @@
-import co.yml.coreui.jacoco.addExclusion
-import co.yml.coreui.jacoco.setModuleTestCoverageLimits
+import co.yml.ytag.jacoco.addExclusion
+import co.yml.ytag.jacoco.setModuleTestCoverageLimits
 
 @Suppress("DSL_SCOPE_VIOLATION") // scope violation issue: work around suggested from: https://github.com/gradle/gradle/issues/22797
 plugins {
-    id("co.yml.coreui.library")
-    id("co.yml.coreui.hilt")
-    id("co.yml.coreui.library.jacoco")
+    id("co.yml.ytag.library")
+    id("co.yml.ytag.hilt")
+    id("co.yml.ytag.library.jacoco")
 }
 
 private val excludedFiles = mutableSetOf(
-    "**/co.yml.coreui/core/data/model/*",
-    "**/co.yml.coreui/core/data/di/*"
+    "**/co.yml.ytag/core/data/model/*",
+    "**/co.yml.ytag/core/data/di/*"
 )
 private val limits = mutableMapOf(
     "instruction" to 50.0,
@@ -24,7 +24,7 @@ addExclusion(excludedFiles)
 setModuleTestCoverageLimits(limits)
 
 android {
-    namespace = "co.yml.coreui.data"
+    namespace = "co.yml.ytag.data"
 }
 
 dependencies {

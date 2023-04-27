@@ -8,8 +8,8 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.kotlin
-import co.yml.coreui.configureFlavors
-import co.yml.coreui.configureKotlinAndroid
+import co.yml.ytag.configureFlavors
+import co.yml.ytag.configureKotlinAndroid
 
 /**
  * Library convention plugin
@@ -28,7 +28,7 @@ class LibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig {
-                    testInstrumentationRunner = "co.yml.coreui.core.test.HiltTestRunner"
+                    testInstrumentationRunner = "co.yml.ytag.core.test.HiltTestRunner"
                 }
                 defaultConfig.targetSdk = 33
                 configureFlavors(this)

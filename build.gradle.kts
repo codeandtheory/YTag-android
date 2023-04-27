@@ -17,7 +17,7 @@ plugins {
     alias(versionCatalogLibs.plugins.sonar)
     alias(versionCatalogLibs.plugins.dokka)
     alias(versionCatalogLibs.plugins.ktlint)
-    id("co.yml.coreui.project.jacoco")
+    id("co.yml.ytag.project.jacoco")
 }
 
 sonarqube {

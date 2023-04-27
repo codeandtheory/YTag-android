@@ -5,7 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.getByType
-import co.yml.coreui.configureComposeApplication
+import co.yml.ytag.configureComposeApplication
 
 /**
  * Compose application convention plugin

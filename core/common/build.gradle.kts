@@ -1,15 +1,15 @@
-import co.yml.coreui.jacoco.addExclusion
-import co.yml.coreui.jacoco.setModuleTestCoverageLimits
+import co.yml.ytag.jacoco.addExclusion
+import co.yml.ytag.jacoco.setModuleTestCoverageLimits
 
 plugins {
-    id("co.yml.coreui.library")
-    id("co.yml.coreui.library.jacoco")
-    id("co.yml.coreui.hilt")
+    id("co.yml.ytag.library")
+    id("co.yml.ytag.library.jacoco")
+    id("co.yml.ytag.hilt")
 }
 
 private val excludedFiles = mutableSetOf(
-    "**/co.yml.coreui/core/common/model/*",
-    "**/co.yml.coreui/core/common/di/*"
+    "**/co.yml.ytag/core/common/model/*",
+    "**/co.yml.ytag/core/common/di/*"
 )
 private val limits = mutableMapOf(
     "instruction" to 0.0,
@@ -23,5 +23,5 @@ addExclusion(excludedFiles)
 setModuleTestCoverageLimits(limits)
 
 android {
-    namespace = "co.yml.coreui.core.common"
+    namespace = "co.yml.ytag.core.common"
 }

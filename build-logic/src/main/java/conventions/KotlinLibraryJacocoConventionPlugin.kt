@@ -2,7 +2,7 @@ package conventions
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import co.yml.coreui.jacoco.setupKotlinJacocoPlugin
+import co.yml.ytag.jacoco.setupKotlinJacocoPlugin
 
 /**
  * Library kotlin jacoco convention plugin

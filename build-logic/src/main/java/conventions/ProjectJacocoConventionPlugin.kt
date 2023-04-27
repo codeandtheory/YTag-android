@@ -7,8 +7,8 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.gradle.testing.jacoco.plugins.JacocoPlugin
-import co.yml.coreui.jacoco.extractTestCoverage
-import co.yml.coreui.jacoco.jacoco
+import co.yml.ytag.jacoco.extractTestCoverage
+import co.yml.ytag.jacoco.jacoco
 
 /**
  * Project jacoco convention plugin
