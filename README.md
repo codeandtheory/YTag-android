@@ -142,7 +142,7 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
 ## License
 
 ```
-    Copyright 2022 YCharts
+    Copyright 2023 YTags
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
