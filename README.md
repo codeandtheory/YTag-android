@@ -1,8 +1,8 @@
 # Y Tags
 
-Y Tag is a UI element in Android (some times referred to as chips) which displays a piece of
+Y Tag is a UI element in Android (sometimes referred to as chips) which displays a piece of
 information.
-It consist of a leading icon(optional), Text and a trailing icon (optional).
+It consists of a leading icon(optional), Text and a trailing icon (optional).
 
 ## Features
 
@@ -15,7 +15,7 @@ It consist of a leading icon(optional), Text and a trailing icon (optional).
   - Shadow
 - Provides a container called Tag view container which holds multiple tags
   - Container size can be fixed or variable
-  - If container does not have enough space to accommodate the given tags, it will show over flow
+  - If the container does not have enough space to accommodate the given tags, it will show an overflow
     tag which is configurable.
 - Built with Compose UI
 
@@ -114,29 +114,30 @@ TagView(text = text,  tagViewModifiers = tagViewModifiers, leadingIcon = leading
 
 ### How to generate test report
 
-- Generating jacoco test report
+- Generating Jacoco test report
   - Gradle command `clean build createMergedJacocoReport`
-    - From android studio
-      - Open gradle menu bar from android studio right side panel
-      - Click on the gradle icon and
-      - In command popup window type `clean build createMergedJacocoReport` and press enter
+    - From Android studio
+      - Open the Gradle menu bar from Android Studio right-side panel
+      - Click on the Gradle icon and
+      - In the command popup window type `clean build createMergedJacocoReport` and press enter
       - Wait for the execution completion,
-      - After successful execution each module level execution report will be stored in '
+      - After successful execution each module-level execution report will be stored in '
         module\build\reports\jacoco\html\index.html'.
 
 ### How to generate dokka report
 
 - Gradle command single module `clean build dokkaHtml` for multi
   module `clean build dokkaHtmlMultiModule`
-  - From android studio
-  - Open gradle menu bar from android studio right side panel
-  - Click on the gradle icon and
-  - In command popup window type `dokkaHtml` for multi module `dokkaHtmlMultiModule`
+  - From Android Studio:
+  - Open the Gradle menu bar from Android Studio right side panel
+  - Click on the Gradle icon and
+  - In the command popup window type `dokkaHtml` for multi-module `dokkaHtmlMultiModule`
 
 ### How to check KTLint
 
-- Gradle command for checking lint error `ktlintCheck`
-- Gradle command for formatting code `ktlintFormat`
+- Gradle command for checking lint error: `ktlintCheck`
+- Gradle command for formatting code: `ktlintFormat`
+  
   =======
 
 ## License
