@@ -1,4 +1,4 @@
-package co.yml.ytag.ui
+package co.yml.ytag.app.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

@@ -1,4 +1,4 @@
-package co.yml.ytag.ui
+package co.yml.ytag.app.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
