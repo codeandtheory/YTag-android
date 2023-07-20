@@ -1,4 +1,4 @@
-package co.yml.ytag
+package co.yml.ytag.app
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.lifecycle.Lifecycle
@@ -38,7 +38,7 @@ class MainActivityTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        Assert.assertTrue(appContext.packageName.contains("co.yml.ytag"))
+        Assert.assertTrue(appContext.packageName.contains("co.yml.ytag.app"))
     }
 
     /**

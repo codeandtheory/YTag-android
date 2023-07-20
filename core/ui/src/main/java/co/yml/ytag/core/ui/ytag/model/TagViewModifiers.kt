@@ -1,4 +1,4 @@
-package co.yml.ytag.ui.ytag.model
+package co.yml.ytag.core.ui.ytag.model
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.graphics.Color

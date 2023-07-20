@@ -1,4 +1,4 @@
-package co.yml.ytag.ui.theme
+package co.yml.ytag.core.ui.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="co.yml.ytag.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="co.yml.ytag.YTag"
+        android:name=".YTag"
         tools:replace="android:allowBackup"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"

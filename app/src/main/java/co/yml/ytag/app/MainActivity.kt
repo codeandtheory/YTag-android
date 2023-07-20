@@ -1,9 +1,9 @@
-package co.yml.ytag
+package co.yml.ytag.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import co.yml.ytag.ui.AppScreen
+import co.yml.ytag.app.ui.AppScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

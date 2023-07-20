@@ -1,4 +1,4 @@
-package co.yml.ytag.ui.ytag
+package co.yml.ytag.core.ui.ytag
 
 import android.R
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,8 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.printToString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -21,8 +24,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.yml.ytag.ui.ytag.model.TagViewData
-import co.yml.ytag.ui.ytag.model.TagViewModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewData
+import co.yml.ytag.core.ui.ytag.model.TagViewModifiers
 import org.junit.Rule
 import org.junit.Test
 

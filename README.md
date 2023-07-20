@@ -20,7 +20,7 @@ It consists of a leading icon(optional), Text and a trailing icon (optional).
 - Built with Compose UI
 
 ## Usage
-
+implementation("co.yml:ytag:1.0.0")
 
 **Basic**
 

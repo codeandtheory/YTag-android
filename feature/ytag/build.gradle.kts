@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation(versionCatalogLibs.hilt.nav.compose)
     implementation(versionCatalogLibs.androidx.lifecycle.viewModelCompose)
-    implementation(project(mapOf("path" to ":core:ui")))
+    implementation("co.yml:ytag:1.0.0")
     implementation(project(mapOf("path" to ":core:test")))
     testImplementation(project(mapOf("path" to ":core:test")))
 

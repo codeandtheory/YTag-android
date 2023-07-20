@@ -1,15 +1,18 @@
-package co.yml.ytag.ui.ytag
+package co.yml.ytag.core.ui.ytag
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.printToString
 import androidx.compose.ui.unit.dp
-import co.yml.ytag.ui.ytag.model.TagViewContainerModifiers
-import co.yml.ytag.ui.ytag.model.TagViewData
-import co.yml.ytag.ui.ytag.model.TagViewModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewContainerModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewData
+import co.yml.ytag.core.ui.ytag.model.TagViewModifiers
 import org.junit.Rule
 import org.junit.Test
 
