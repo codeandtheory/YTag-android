@@ -1,4 +1,4 @@
-package co.yml.ytag.ui.ytag
+package co.yml.ytag.core.ui.ytag
 
 import android.R
 import android.annotation.SuppressLint
@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import co.yml.ytag.ui.ytag.model.TagViewData
-import co.yml.ytag.ui.ytag.model.TagViewModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewData
+import co.yml.ytag.core.ui.ytag.model.TagViewModifiers
 
 /**
  * [TagView] Compose method used for creating a custom chip

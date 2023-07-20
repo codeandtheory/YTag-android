@@ -9,16 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "co.yml.ytag.ui"
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
+    namespace = "co.yml.ytag.core.ui"
 }
 
 dependencies {
@@ -46,8 +37,10 @@ publishing {
             name = "YTag"
             setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
             credentials {
-                username = project.findProperty("mavenCentralUsername")?.toString() ?: System.getenv("MAVEN_USERNAME")
-                password = project.findProperty("mavenCentralPassword")?.toString() ?: System.getenv("MAVEN_PASSWORD")
+                username = project.findProperty("mavenCentralUsername")?.toString()
+                    ?: System.getenv("MAVEN_USERNAME")
+                password = project.findProperty("mavenCentralPassword")?.toString()
+                    ?: System.getenv("MAVEN_PASSWORD")
             }
         }
     }
@@ -98,13 +91,11 @@ publishing {
         }
     }
 }
-
-
 signing {
     useInMemoryPgpKeys(
         project.findProperty("signing.keyId")?.toString() ?: System.getenv("SIGNINGKEY"),
         project.findProperty("signing.InMemoryKey")?.toString() ?: System.getenv("MEMORY_KEY"),
-        project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
+        project.findProperty("signing.password")?.toString() ?: System.getenv("SIGNINGPASSWORD")
     )
     sign(publishing.publications)
 }

@@ -1,4 +1,4 @@
-package co.yml.ytag.ui.ytag
+package co.yml.ytag.core.ui.ytag
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
@@ -24,10 +24,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
-import co.yml.ytag.ui.R
-import co.yml.ytag.ui.ytag.model.TagViewContainerModifiers
-import co.yml.ytag.ui.ytag.model.TagViewData
-import co.yml.ytag.ui.ytag.model.TagViewModifiers
+import co.yml.ytag.core.ui.R
+import co.yml.ytag.core.ui.ytag.model.TagViewContainerModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewData
+import co.yml.ytag.core.ui.ytag.model.TagViewModifiers
 
 /**
  * [TagViewContainer] compose method used for hosting multiple chips

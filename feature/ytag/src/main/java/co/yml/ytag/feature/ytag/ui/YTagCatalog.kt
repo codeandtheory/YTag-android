@@ -40,14 +40,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.yml.ytag.core.ui.templates.AppBar
+import co.yml.ytag.core.ui.theme.YTagTheme
+import co.yml.ytag.core.ui.ytag.TagViewContainer
+import co.yml.ytag.core.ui.ytag.model.AlphaAnimation
+import co.yml.ytag.core.ui.ytag.model.TagViewContainerModifiers
+import co.yml.ytag.core.ui.ytag.model.TagViewData
+import co.yml.ytag.core.ui.ytag.model.TagViewModifiers
 import co.yml.ytag.ui.R
-import co.yml.ytag.ui.templates.AppBar
-import co.yml.ytag.ui.theme.YTagTheme
-import co.yml.ytag.ui.ytag.TagViewContainer
-import co.yml.ytag.ui.ytag.model.AlphaAnimation
-import co.yml.ytag.ui.ytag.model.TagViewContainerModifiers
-import co.yml.ytag.ui.ytag.model.TagViewData
-import co.yml.ytag.ui.ytag.model.TagViewModifiers
 import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,7 +55,8 @@ import kotlin.random.Random
 fun YTagCatalog() {
     YTagTheme {
         Scaffold(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .testTag("y_tag"),
             containerColor = YTagTheme.colors.background,
             topBar = {
@@ -185,7 +186,8 @@ fun DefaultTagViewContainer(tagViewData: MutableList<TagViewData>) {
                     )
                     }",
                     tagViewModifiers = TagViewModifiers.Builder().width(90.dp).shape(CircleShape)
-                        .backgroundColor(tagColor).textColor(Color.Black).style(textStyle).alphaAnimation(
+                        .backgroundColor(tagColor).textColor(Color.Black).style(textStyle)
+                        .alphaAnimation(
                             AlphaAnimation(enabled = true)
                         ).build()
                 )
