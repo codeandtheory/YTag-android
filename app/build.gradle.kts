@@ -9,7 +9,7 @@ plugins {
 android {
     namespace = "co.yml.ytag"
     defaultConfig {
-        applicationId = "co.yml.ytag"
+        applicationId = "co.yml.ytag.app"
         versionCode = 1
         versionName = "1.0"
     }
